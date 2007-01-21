@@ -1,0 +1,27 @@
+<h1>Список типов интерфейсов</h1>
+
+<table>
+  <tr>
+  <% for column in InterfaceType.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for interface_type in @interface_types %>
+  <tr>
+  <% for column in InterfaceType.content_columns %>
+    <td><%=h interface_type.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Показать', :action => 'show', :id => interface_type %></td>
+    <td><%= link_to 'Редактировать', :action => 'edit', :id => interface_type %></td>
+    <td><%= link_to 'Удалить', { :action => 'destroy', :id => interface_type }, :confirm => 'Точно удалить?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Предыдущая страница', { :page => @interface_type_pages.current.previous } if @interface_type_pages.current.previous %>
+<%= link_to 'Следующая страница', { :page => @interface_type_pages.current.next } if @interface_type_pages.current.next %> 
+
+<br />
+
+<%= link_to 'Новый тип интерфейса', :action => 'new' %>

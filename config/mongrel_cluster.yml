@@ -1,0 +1,9 @@
+--- 
+user: apache
+cwd: /var/www/localhost/htdocs/lab
+port: "5000"
+environment: development
+group: apache
+address: 192.168.157.1
+pid_file: log/mongrel.pid
+servers: 3

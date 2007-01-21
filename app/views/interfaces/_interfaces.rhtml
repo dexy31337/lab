@@ -1,0 +1,8 @@
+<table>
+<% Interface.find(:all,:conditions => ["device_id = ?",params[:device_id]]).collect.each  do |i| %>
+<tr>
+  <td><%= i.name %></td>
+  <td><%= i.interface.name if i.interface %></td>
+</tr>
+<% end %>
+</table>

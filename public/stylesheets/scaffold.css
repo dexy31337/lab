@@ -1,0 +1,95 @@
+body { background-color: #fffffe; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+TABLE {border-collapse: collapse}
+a { color: #000; text-decoration:none}
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+a.tablehead { color: #FFFFFF}
+a.tablehead:link {color:#FFFFFF}
+a.tablehead:visited {color:#FFFFFF}
+a.tablehead:hover {color:#FFFFFF}
+a.tablehead:active {color:#FFFFFF}
+
+.crosslabel { font-size: 10px }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
+}
+
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid grey;
+  width: 100%;
+}
+
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
+}
+.toolbox {
+  position: absolute;
+  padding: 0px;
+  width: 160px;
+  height: 80px;
+  margin: 5px;
+  background-color: #eee;
+  z-index: 1;
+  font-size: 12px;
+  font-family: Tahoma,Verdana, sans-serif;
+  border: 1px solid #aaa;
+  visibility: hidden;
+}

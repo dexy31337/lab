@@ -1,0 +1,19 @@
+<h1>Новая резервация</h1>
+<%= start_form_tag :action => 'create' %>
+  <p><label for="reservation_start">Начало</label><br/>
+  <%= date_select 'reservation', 'start'  %></p>
+  
+  <p><label for="reservation_engineer_id">Инженер</label></p>
+  <%= select 'reservation', 'engineer_id', Engineer.find_all.collect {|e|  [ e.last + " " + e.first , e.id ] } %></p>
+  
+  <%= render :partial => 'form' %>
+  
+<% Device.find(:all,:order=>:labnumber).each do |dev| %>
+  <% if dev.reservation == nil && dev.device == nil && !(dev.labnumber =~ /P[0-9]*/)%>
+    <%= check_box('device_'+dev.id.to_s, 'checked', {}, 'checked','') %>(<%= dev.labnumber %>) <%= dev.name %><br/>
+  <% end %>
+<% end %>
+  <%= submit_tag "Создать" %>
+<%= end_form_tag %>
+
+<%= link_to 'Назад', :action => 'list' %>

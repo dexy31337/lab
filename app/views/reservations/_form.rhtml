@@ -1,0 +1,12 @@
+<%= error_messages_for 'reservation' %>
+
+<!--[form:reservation]-->
+
+<p><label for="reservation_end">Конец</label><br/>
+<%= date_select 'reservation', 'end'  %></p>
+
+<p><label for="reservation_comment">Комментарии</label><br/>
+<%= text_area 'reservation', 'comment'  %></p>
+
+<!--[eoform:reservation]-->
+

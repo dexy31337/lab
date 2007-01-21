@@ -1,0 +1,17 @@
+<h1>Список устройств</h1>
+
+
+<p>
+
+<%= form_remote_tag(:update => "devlist", :url => { :action => :search})%>
+      Искать <%= select_tag :searchdevices, '<option value="all" selected>все</option><option value="reserved">зарезервированные</option><option value="free">свободные</option>'%> <%= select_tag :searchdevtype, '<option value="all">устройства и модули</option><option value="chasis" selected>устройства</option><option value="modules">модули</option>'%>, у которых <%= select_tag :searchfield , '<option value="labnumber">инв. номер</option><option value="partnumber">партномер</option><option value="serialnumber">серийный номер</option><option value="name">описание</option>' %> содержит <%= text_field_tag :searchtext %>
+      <%= image_submit_tag 'viewmag', {:size=>"16x16"} %>
+      <%= link_to_remote image_tag('stop',:size=>"16x16",:border=>0),{ :update => 'devlist' ,:url => { :action => :search, :searchfield => 'labnumber', :order =>@params[:order]}},{:onclick=>"document.getElementById('searchtext').value = \"\""} %>
+      <br>
+<%= end_form_tag %>
+
+</p>
+<div id="devlist">
+</div>
+<%= javascript_tag remote_function(:update => "devlist", :url => { :action => :search, :searchfield => 'labnumber' }) %>
+<%= link_to 'Новое устройство', :action => 'new' %>

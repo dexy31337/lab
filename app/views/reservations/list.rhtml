@@ -1,0 +1,38 @@
+<h1>Список резерваций</h1>
+
+<TABLE border=0 cellspacing="0" cellpadding="3" width="100%">
+     <TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
+      <TD>Инженер</TD>
+      <TD>Дата начала</TD>
+      <TD>Дата окончания</TD>
+      <TD>Количество устройств</TD>
+      <TD>Комментарии</TD>
+      <TD></TD>
+     </TR>
+      <% @col = 1 %>
+     <% @reservations.each do |reservation| %>
+     <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
+      <% if (@col >= 2)
+        @col=1
+      else
+        @col=@col+1
+      end %>
+     <TD><%= link_to  reservation.engineer.last + ' ' + reservation.engineer.first, {:action=>"show", :id=>reservation.id} %></TD>
+       <TD><%= link_to reservation.start.strftime("%d-%b-%y"), {:action=>"show", :id=>reservation.id} %></TD>
+      <TD><% 'истекло' if (Time.now != reservation.end)%><%= link_to reservation.end.strftime("%d-%b-%y"), {:action=>"show", :id=>reservation.id} %></TD>
+      <TD><%= reservation.devices.count %></TD>
+      <TD><%= reservation.comment %></TD>
+      <TD>
+      <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>reservation.id} %>
+      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>reservation.id}, :confirm=>"Удалить резервацию и освободить оборудование?", :post=>true %>
+      </TD>
+     </TR>
+     <% end %>
+</TABLE>
+
+<%= link_to 'Предыдущая страница', { :page => @reservation_pages.current.previous } if @reservation_pages.current.previous %>
+<%= link_to 'Следующая страница', { :page => @reservation_pages.current.next } if @reservation_pages.current.next %> 
+
+<br />
+
+<%= link_to 'Новая резервация', :action => 'new' %>

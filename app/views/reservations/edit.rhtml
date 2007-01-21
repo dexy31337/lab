@@ -1,0 +1,7 @@
+<%= start_form_tag :action => 'update', :id => @reservation %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить' %>
+<%= end_form_tag %>
+
+<%= link_to 'Показать', :action => 'show', :id => @reservation %> |
+<%= link_to 'Назад', :action => 'list' %>

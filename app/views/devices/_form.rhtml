@@ -1,0 +1,65 @@
+<%= error_messages_for 'device' %>
+
+<!--[form:device]-->
+<p><label for="device_vendor_id">Производитель</label>
+<%= select 'device', 'vendor_id', Vendor.find_all.collect {|d| [ d.name, d.id ] } %></p>
+
+<p><label for="device_name">Название</label>
+<%= text_field 'device', 'name'  %></p>
+
+<p><label for="device_partnumber">Партномер</label>
+<%= text_field 'device', 'partnumber'  %></p>
+
+<p><label for="device_serialnumber">Серийный номер</label>
+<%= text_field 'device', 'serialnumber'  %></p>
+
+<p><label for="device_labnumber">Инвентарный номер</label>
+<%= text_field 'device', 'labnumber'  %></p>
+
+<p><label for="device_device_id">Родительское устройство</label>
+<%= select 'device', 'device_id', Device.find( :all,:order => :labnumber).collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
+
+<p><label for="device_location">Местоположение</label>
+<%= select 'device', 'location',["В коробке","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15"] %></p>
+
+<p><label for="device_box_location">Местоположение коробки</label>
+<%= select 'device', 'box_location',["Нет","S0-1","S0-2","S1-1-R1","S1-1-R2","S1-2-R1","S1-2-R2","S1-3-R1","S1-3-R2","S2-1","S2-2","S2-3","S3-1","S3-2","S3-3","B1-1","B1-2","B1-3","M1-1","M1-2","M1-3","LAB-1-1","LAB-1-2","LAB-1-3","LAB-1-4","LAB-2-1","LAB-2-2","LAB-2-3","LAB-2-4","LAB-3-1","LAB-3-2","LAB-3-3","LAB-3-4"] %></p>
+
+<p><label for="device_comment">Комментарии</label><br/>
+<%= text_area 'device', 'comment' %></p>
+<p>
+  <label>Интерфейсы</label>
+  <ul>
+    <%
+      Interface.find_all.each do |interface|
+        if(interface.device_id == @device.id)%>
+        <li><%= interface.name %> - 
+	<%= '<i>0</i>' if interface.interface == nil%>
+        <%= '<i>'+ interface.interface.name.to_s + ' ( ' + interface.interface.device.name.to_s + ' ) </i>' if interface.interface != nil%>
+        </i>
+        <%= link_to 'Удалить', {:controller=>'interfaces', :action =>'destroy', :id=>interface.id}, :confirm=>"Точно?", :post=>true %>
+        <%= link_to 'Редактировать', :controller=>'interfaces', :action=>'edit',:id=>interface.id %></li>
+        <%end
+      end
+    %>
+  </ul>
+</p>
+<% if @device[:serving_property_id] != nil %>
+<%= hidden_field 'device','serving_property_id' %>
+<% end %>
+<div id=servprop>
+	<% if @device[:serving_property_id] == nil%>
+		<%= render :partial => 'no_server_props' %>
+	<% else %>
+		<%= render :partial => 'server_props' %>
+	<% end %>
+</div>
+<p>
+<% if @device.reservation_id != nil %>
+Зарезервировано с <%= @device.reservation.start.to_s %> по <%= @device.reservation.end.to_s %>. 
+<% else %>
+<i>В данный момент свободно</i>
+<% end %>
+</p>
+<!--[eoform:device_v2]-->
+

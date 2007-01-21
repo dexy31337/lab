@@ -1,0 +1,8 @@
+<h1>Новый тип интерфейса</h1>
+
+<%= start_form_tag :action => 'create' %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Создать" %>
+<%= end_form_tag %>
+
+<%= link_to 'Назад', :action => 'list' %>

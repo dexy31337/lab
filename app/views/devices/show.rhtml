@@ -1,0 +1,71 @@
+<p>
+<h1>Устройство</h1>
+<h3><%= @device[:name] %></h3>
+<% if @device[:serving_property_id] != nil %>
+<p>Cервер
+<% @server = ServingProperty.find(@device[:serving_property_id]) %>
+<%= @server.cpu_count.to_s + "x" + @server.cpu_type %>
+</p>
+<% end %>
+<% if @device.reservation_id != nil %>
+<font color="Red">Зарезервировано с <%= @device.reservation.start.strftime("%d-%b-%y") %> по <%= @device.reservation.end.strftime("%d-%b-%y") %>, инженер <%= @device.reservation.engineer.last %> <%= @device.reservation.engineer.first %>. </font>
+<% else %>
+<i>В данный момент свободно</i>
+<% end %>
+</p>
+<p>
+<h2>Идентификация</h2>
+<table width ="600px" border=1>
+	<tr>
+		<td width="45%">Партномер</td>
+		<td width="45%">Серийный</td>
+		<td width="10%">Лабномер</td>
+	</tr>
+	<tr>
+		<td><%= @device[:partnumber]%></td>
+		<td><%= @device[:serialnumber]%></td>
+		<td><%= @device[:labnumber]%></td>
+	</tr>
+</table>
+</p>
+<p>
+<h2>Местоположение</h2>
+<table width = "400px" border=1>
+	<tr>
+		<td>Устройство</td>
+		<td>Коробка</td>
+	</tr>
+	<tr>
+		<td><%= @device[:location]%></td>
+		<td><%= @device[:box_location]%></td>
+	</tr>
+</table>
+</p>
+<p>
+<h2>Комментарии</h2>
+<%= @device[:comment] %>
+</p>
+
+<% #А тут у нас будет инфа о сервере 
+%>
+
+<% if @device[:serving_property_id] != nil %>
+Это сервер
+<% @server = ServingProperty.find(@device[:serving_property_id]) %>
+<%= @server.cpu_count.to_s + "x" + @server.cpu_type %>
+<% end %>
+
+<% #Прокрутим до родительского устройства
+@topdev = @device
+while @topdev[:device_id] != nil
+  @topdev = @topdev.device
+end 
+%>
+<p><center><h2>Логическая структура</h2></center></p>
+<% #И понеслось говно рекурсивно по трубам 
+%>
+<p>
+<%= render :partial => "dnode", :locals => {:device => @topdev, :level => 0} %>
+</p>
+<%= link_to 'Редактировать', :action => 'edit', :id => @device %> |
+<%= link_to 'Назад', :action => 'list' %>

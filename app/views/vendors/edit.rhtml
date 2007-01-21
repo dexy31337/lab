@@ -1,0 +1,9 @@
+<h1>Редактировать производителя</h1>
+
+<%= start_form_tag :action => 'update', :id => @vendor %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить' %>
+<%= end_form_tag %>
+
+<%= link_to 'Показать', :action => 'show', :id => @vendor %> |
+<%= link_to 'Назад', :action => 'list' %>

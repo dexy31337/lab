@@ -1,0 +1,50 @@
+<h1>Список интерфейсов</h1>
+<!--
+<table>
+  <tr>
+  <% for column in Interface.content_columns %>
+    <th><%= column.human_name %></th>
+  <% end %>
+  </tr>
+  
+<% for interface in @interfaces %>
+  <tr>
+  <% for column in Interface.content_columns %>
+    <td><%=h interface.send(column.name) %></td>
+  <% end %>
+    <td><%= link_to 'Показать', :action => 'show', :id => interface %></td>
+    <td><%= link_to 'Редакmировать', :action => 'edit', :id => interface %></td>
+    <td><%= link_to 'Удалить', { :action => 'destroy', :id => interface }, :confirm => 'Точно удалить?', :post => true %></td>
+  </tr>
+<% end %>
+</table>
+
+<%= link_to 'Предыдущая страница', { :page => @interface_pages.current.previous } if @interface_pages.current.previous %>
+<%= link_to 'Следующая страница', { :page => @interface_pages.current.next } if @interface_pages.current.next %> 
+
+<br />
+
+<%= link_to 'Новый интерфейс', :action => 'new' %>
+
+-->
+
+<table>
+  <TR>
+    <TD>
+      <%= select 'device','location1',['R2','R3'],{:include_blank => true }%>
+      <%= observe_field :device_location1,
+                        :update => 'device_1',
+                        :url => { :action => :drawdevicedropdown, :devid => 1},
+                        :with=> "'device_location=' + encodeURIComponent(value)" %>
+      <div id='device_1'></div>
+    </TD>
+    <TD><!--
+      <%= select 'device','location2',['R2','R3'],{:include_blank => true }%>
+      <%= observe_field :device_location2,
+                      :update => 'device_2',
+                      :url => { :action => :drawdevicedropdown, :devid => 2 },
+                      :with=>"'device_location=' + encodeURIComponent(value)" %>
+      <div id='device_2'></div>
+    </TD>-->
+  </TR>
+</table>

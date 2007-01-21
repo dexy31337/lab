@@ -1,0 +1,35 @@
+<table border="0" cellspacing="0" cellpadding="0" align="center"  <%= ' bgcolor="#99aeef"' if device == @device%>>
+  <tr>
+    <td width="1px" rowspan="4" bgcolor="#0f2b7e"></td>
+    <td height="1px" bgcolor="#0f2b7e" <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>></td>
+    <td width="1px" rowspan="4" bgcolor="#0f2b7e"></td>
+  </tr>
+  <tr>
+    <td <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>>
+      <p style="padding: 5 5 5 5" align="center"><%= link_to device.labnumber + ':' + device.partnumber + '<br/>'+ device.name, :action => 'show', :id => device.id %></p> 
+    </td>
+  </tr><% rowcount = 0 %>
+  <tr valign="top"><% level = level +1 %>
+   <td style="padding: 3 3 3 3">
+    <table>
+      <tr>
+      
+        <% device.devices.each do |dev| %>
+        <td>
+          <%= render :partial => "dnode", :locals => {:device => dev, :level => level} %><% rowcount = rowcount + 1%>
+          <% if rowcount >= 4 %>
+            </td></tr>
+            <tr>
+            <% rowcount = 0
+          end %>
+        </td>
+        <% end %>
+      
+      </tr>
+    </table>
+   </td>
+  </tr>
+  <tr>
+    <td <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %> bgcolor="#0f2b7e"></td>
+    </tr>
+</table>

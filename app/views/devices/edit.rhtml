@@ -1,0 +1,9 @@
+<h1>Редактировать устройство</h1>
+
+<%= start_form_tag :action => 'update', :id => @device %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить' %>
+<%= end_form_tag %>
+
+<%= link_to 'Показать', :action => 'show', :id => @device %> |
+<%= link_to 'Назад', :action => 'list' %>

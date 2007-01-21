@@ -1,0 +1,10 @@
+<%= link_to_remote 'Удалить серверные свойства', {:update => 'servprop', :url => { :action => 'render_no_servprops'}} %>
+<p> Процессоры <%= text_field 'serving_property','cpu_count' %>
+х
+<%= text_field 'serving_property','cpu_type' %></p>
+<p>Оперативная память <%= text_field 'serving_property','ram' %></p>
+<p>Дисковое пространство <%= text_field 'serving_property','disks_total' %></p>
+<p>Физические диски <%= text_field 'serving_property','disks_layout' %></p>
+<p>ОС <%= text_field 'serving_property','os' %></p>
+<p>Логин администратора <%= text_field 'serving_property','admin_login'%></p>
+<p>Пароль администратора <%= text_field 'serving_property','admin_pass'%></p>

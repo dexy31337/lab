@@ -1,0 +1,9 @@
+<h1>Редактировать интерфейс</h1>
+
+<%= start_form_tag :action => 'update', :id => @interface %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag 'Сохранить' %>
+<%= end_form_tag %>
+
+<%= link_to 'Показать', :action => 'show', :id => @interface %> |
+<%= link_to 'Назад', :action => 'list' %>

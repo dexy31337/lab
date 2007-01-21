@@ -1,0 +1,15 @@
+<h1>Резервация</h1>
+Инженер: <%= @reservation.engineer.last + ' ' + @reservation.engineer.first + ' ' + @reservation.engineer.middle %><br/>
+Начало резервации : <%= @reservation.start.to_s %><br/>
+Конец резервации : <%= @reservation.end.to_s %><br/><br/>
+Комментарий:<br>
+<%= @reservation.comment.to_s %> <br>
+<br/>
+Список устройств :<br/>
+<% @reservation.devices.collect.each do |dev| %>
+  <%= link_to dev.name + " (" + dev.labnumber + ")", :controller => 'devices', :action => 'show', :id => dev.id %><br/>
+<% end %>
+<br/>
+
+<%= link_to 'Редактировать', :action => 'edit', :id => @reservation %> |
+<%= link_to 'Список', :action => 'list' %>

@@ -1,0 +1,16 @@
+<% int = Interface.find(@params[:id]) %>
+<table width="100%" border=0>
+<TR>
+<TD width="80%" align="center"><%= image_tag 'rss_tag', :size => '16x16', :alt => ''%><%= int.name %></TD>
+<TD width="20%" align="right" ><%= image_tag 'fileclose', {:size=>'16x16', :onclick => 'document.getElementById("toolbox").style.visibility = "hidden"'} %></TD>
+</TR>
+</table>
+<% if int.interface %>
+Скроссирован в <%= int.interface.name %><br/>
+<%= link_to 'Раскроссировать'+image_tag('button_cancel',:size=>'16x16',:border=>'0') , :action => :uncross, :id => int.id%>
+<% else %>
+Скроссировать в 
+<%= text_field_tag 'int_to',nil,{:maxlength => '5', :size=>'5px', :witdh => '10px'}%>
+<div id="submitter"></div>
+<%= observe_field :int_to, :update => :submitter, :frequency => 0.5, :url => { :action => :testsubmit, :id => @params[:id] },:with => "'int_to=' + encodeURIComponent(value)" %>
+<% end %>

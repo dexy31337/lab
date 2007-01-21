@@ -1,0 +1,8 @@
+<% for column in Engineer.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @engineer.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Редактирова', :action => 'edit', :id => @engineer %> |
+<%= link_to 'Назад', :action => 'list' %>

@@ -1,0 +1,8 @@
+<% for column in InterfaceType.content_columns %>
+<p>
+  <b><%= column.human_name %>:</b> <%=h @interface_type.send(column.name) %>
+</p>
+<% end %>
+
+<%= link_to 'Редактировать', :action => 'edit', :id => @interface_type %> |
+<%= link_to 'Назад', :action => 'list' %>

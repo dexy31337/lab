@@ -1,0 +1,6 @@
+<%= select 'device', 'id'+params[:devid].to_s, Device.find(:all,:conditions => ["location = ?",  params[:device_location]]).collect {|d| [ d.name.to_s + " ( " + d.labnumber.to_s + " ) ", d.id ] }, { :include_blank => true } %>
+      <%= observe_field 'device_id'+params[:devid].to_s,
+                      :update => 'interfaces'+params[:devid].to_s,
+                      :url => { :action => :generateints},
+                      :with=>"'device_id=' + encodeURIComponent(value)" %>
+<div id="interfaces<%= params[:devid].to_s %>"><%= params[:devid].to_s %></div>
