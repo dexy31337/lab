@@ -1,4 +1,5 @@
 class VendorsController < ApplicationController
+
   def index
     list
     render :action => 'list'

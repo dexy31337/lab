@@ -1,4 +1,5 @@
 class AccountController < ApplicationController
+
   model   :user
   layout  'scaffold'
 
@@ -6,7 +7,6 @@ class AccountController < ApplicationController
     case @request.method
       when :post
         if @session['user'] = User.authenticate(@params['user_login'], @params['user_password'])
-
           flash['notice']  = "Login successful"
           redirect_back_or_default :action => "welcome"
         else
@@ -20,8 +20,7 @@ class AccountController < ApplicationController
     case @request.method
       when :post
         @user = User.new(@params['user'])
-        
-        if @user.save      
+        if @user.save
           @session['user'] = User.authenticate(@user.login, @params['user']['password'])
           flash['notice']  = "Signup successful"
           redirect_back_or_default :action => "welcome"          

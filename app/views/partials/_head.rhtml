@@ -11,16 +11,16 @@
 <table border="0" width="60%" cellpadding="0" align="center">
   <TR>
 	<% menu_array = [['Устройства','devices','list']]
-	if(current_user.has_role?('PowerUser'))
+#	if(current_user.has_role?('PowerUser'))
 		menu_array[menu_array.length] = ['Кроссировки','interfaces','showcross']
 		menu_array[menu_array.length] = ['Резервации','reservations','list']
 		menu_array[menu_array.length] = ['Инженеры','engineers','list']
-	end
-	unless session[:rbac_user_id].nil?
-		menu_array[menu_array.length] = ['Выход','access','logout']
-	else
-		menu_array[menu_array.length] = ['Вход','access','login']
-	end
+#	end
+#	unless session[:rbac_user_id].nil?
+#		menu_array[menu_array.length] = ['Выход','access','logout']
+#	else
+#		menu_array[menu_array.length] = ['Вход','access','login']
+#	end
 
 	menu_array.each do |entry| %>
 	<TD align="center" valign="middle">

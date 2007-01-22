@@ -1,4 +1,5 @@
 class InterfaceTypesController < ApplicationController
+
   def index
     list
     render :action => 'list'
