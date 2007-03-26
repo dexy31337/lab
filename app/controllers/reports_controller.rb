@@ -18,12 +18,12 @@ protected
 
 public
   def index
-     list
      render :action => 'list'
   end
   
   def list
   end
+  
   def total_inv
   	@devs = Device.find(:all,:conditions => 'device_id is null')
   end
