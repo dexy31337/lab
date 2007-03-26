@@ -39,14 +39,19 @@
 <%= link_to image_tag("interfaces", :size => "32x32", :border => 0), {:controller => "/interfaces", :action => "showcross"} %></TD>
     <td align ="left">
 <%= link_to "Кроссировки",{:controller => "/interfaces", :action => "showcross"} %></TD>
-    <TD align="center" valign="middle"
-><%= link_to image_tag("reservations", :size => "32x32", :border => 0), {:controller => "/reservations", :action => "list"} %></TD>
+    <TD align="center" valign="middle">
+<%= link_to image_tag("reservations", :size => "32x32", :border => 0), {:controller => "/reservations", :action => "list"} %></TD>
     <td align ="left">
 <%= link_to "Резервации",{:controller => "/reservations", :action => "list"} %></TD>
     <TD align="center" valign="middle">
 <%= link_to image_tag("engineers", :size => "32x32", :border => 0), {:controller => "/engineers", :action => "list"} %></TD>
     <td align ="left">
     <%= link_to "Инженеры",{:controller => "/engineers", :action => "list"} %></TD>
+<%= link_to "Отчеты",{:controller => "/reports", :action => "list"} %></TD>
+    <TD align="center" valign="middle">
+<%= link_to image_tag("reports", :size => "32x32", :border => 0), {:controller => "/reports", :action => "list"} %></TD>
+    <td align ="left">
+    <%= link_to "Отчеты",{:controller => "/reports", :action => "list"} %></TD>
     -->
   </TR>
 </table>
