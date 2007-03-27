@@ -17,7 +17,7 @@
 			<TD><%= dev.partnumber %></TD>
 			<TD><%= dev.serialnumber %></TD>
 		</TR>
-			<% Device.find(:conditions => 'device_id = '+dev.id.to_s).each do |subdev| %>
+			<% Device.find(:all,:conditions => 'device_id = '+dev.id.to_s).each do |subdev| %>
 			<TR>
 				<TD><%= subdev.location %></TD>
 				<TD><%= subdev.vendor.name %></TD>
