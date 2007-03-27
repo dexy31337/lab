@@ -3,11 +3,12 @@
 <div align="center">
 	<TABLE border="1" bordercolor="black" width="100%">
 		<TR>
-			<TD width="10%">Стойка</TD>
-			<TD width="10%">Производитель</TD>
+			<TD width="7%">Стойка</TD>
+			<TD width="8%">Производитель</TD>
 			<TD width="20%">L/N</TD>
 			<TD width="15%">P/N</TD>
 			<TD width="15%">S/N</TD>
+			<TD width="15%">Комментарии</TD>
 		</TR>
       		<% @col = 1 %>
 		<% @devs.each do |dev| %>
@@ -23,6 +24,7 @@
 			<TD><%= dev.labnumber %></TD>
 			<TD><%= dev.partnumber %></TD>
 			<TD><%= dev.serialnumber %></TD>
+			<TD><%= dev.comments %></TD>
 		</TR>
 			<% Device.find(:all,:conditions => 'device_id = '+dev.id.to_s).each do |subdev| %>
 			<TR bgcolor="<%= '#d6d8e1' if @col==1 %><%= '#eef0f7' if @col==2 %>">
@@ -32,6 +34,7 @@
 				<TD><%= subdev.labnumber %>(в <%= dev.labnumber %>)</TD>
 				<TD><%= subdev.partnumber %></TD>
 				<TD><%= subdev.serialnumber %></TD>
+				<TD><%= subdev.comments %></TD>
 			</TR>
 			<% end %>
 		<% end %>
