@@ -24,7 +24,7 @@
 			<TD><%= dev.labnumber %></TD>
 			<TD><%= dev.partnumber %></TD>
 			<TD><%= dev.serialnumber %></TD>
-			<TD><%= dev.comments %></TD>
+			<TD><%= dev.comment %></TD>
 		</TR>
 			<% Device.find(:all,:conditions => 'device_id = '+dev.id.to_s).each do |subdev| %>
 			<TR bgcolor="<%= '#d6d8e1' if @col==1 %><%= '#eef0f7' if @col==2 %>">
