@@ -3,20 +3,20 @@
 <div align="center">
 	<TABLE border="1" width="80%">
 		<TR>
-			<TD width="5%">№</TD>
+			<TD width="10%">Стойка</TD>
 			<TD width="10%">Производитель</TD>
-			<TD width="40%">Название</TD>
+			<TD width="35%">Название</TD>
 			<TD width="15%">P/N</TD>
 			<TD width="15%">S/N</TD>
 			<TD width="15%">L/N</TD>
 		</TR>
 		<% @devs.each do |dev| %>
 		<TR>
-			<TD><%= dev.id %></TD>
-			<TD><%= dev.vendor.name %></TD>
+			<TD><%= dev.location %></TD>
+			<TD><%= dev.vendor %></TD>
+			<TD><%= dev.labnumber %></TD>
 			<TD><%= dev.partnumber %></TD>
 			<TD><%= dev.serialnumber %></TD>
-			<TD><%= dev.labnumber %></TD>
 		</TR>
 		<% end %>
 	</TABLE>
