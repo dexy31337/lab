@@ -25,6 +25,6 @@ public
   end
   
   def total_inv
-  	@devs = Device.find(:all,:conditions => 'device_id is null')
+  	@devs = Device.find(:all,:conditions => 'device_id is null',:group => 'location')
   end
 end
