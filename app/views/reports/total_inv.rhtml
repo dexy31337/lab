@@ -1,16 +1,22 @@
 <h1>Инвентаризация</h1>
 
 <div align="center">
-	<TABLE border="1" width="60%">
+	<TABLE border="1" width="70%">
 		<TR>
 			<TD width="10%">Стойка</TD>
 			<TD width="10%">Производитель</TD>
-			<TD width="10%">L/N</TD>
+			<TD width="20%">L/N</TD>
 			<TD width="15%">P/N</TD>
 			<TD width="15%">S/N</TD>
 		</TR>
 		<% @devs.each do |dev| %>
-		<TR BGCOLOR="#c0c0c0">
+		<TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>">
+
+      		<% if (@col >= 2)
+		        @col=1
+		      else
+		        @col=@col+1
+		      end %>
 			<TD><%= dev.location %></TD>
 			<TD><%= dev.vendor.name %></TD>
 			<TD><%= dev.labnumber %></TD>
@@ -21,7 +27,7 @@
 			<TR>
 				<TD><%= subdev.location %></TD>
 				<TD><%= subdev.vendor.name %></TD>
-				<TD><%= subdev.labnumber %></TD>
+				<TD><%= subdev.labnumber %>(в <%= dev.labnumber %>)</TD>
 				<TD><%= subdev.partnumber %></TD>
 				<TD><%= subdev.serialnumber %></TD>
 			</TR>
