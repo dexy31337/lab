@@ -18,7 +18,7 @@
 			<TD><%= dev.serialnumber %></TD>
 		</TR>
 		<% end %>
-		<% Devices.find(:conditions => 'device_id = '+dev.id).each do |subdev| %>
+		<% Device.find(:conditions => 'device_id = '+dev.id).each do |subdev| %>
 		<TR>
 			<TD><%= subdev.location %></TD>
 			<TD><%= subdev.vendor.name %></TD>
