@@ -17,15 +17,15 @@
 			<TD><%= dev.partnumber %></TD>
 			<TD><%= dev.serialnumber %></TD>
 		</TR>
-		<% end %>
-		<% Device.find(:conditions => 'device_id = '+dev.id).each do |subdev| %>
-		<TR>
-			<TD><%= subdev.location %></TD>
-			<TD><%= subdev.vendor.name %></TD>
-			<TD><%= subdev.labnumber %></TD>
-			<TD><%= subdev.partnumber %></TD>
-			<TD><%= subdev.serialnumber %></TD>
-		</TR>
+			<% Device.find(:conditions => 'device_id = '+dev.id).each do |subdev| %>
+			<TR>
+				<TD><%= subdev.location %></TD>
+				<TD><%= subdev.vendor.name %></TD>
+				<TD><%= subdev.labnumber %></TD>
+				<TD><%= subdev.partnumber %></TD>
+				<TD><%= subdev.serialnumber %></TD>
+			</TR>
+			<% end %>
 		<% end %>
 	</TABLE>
 </div>
