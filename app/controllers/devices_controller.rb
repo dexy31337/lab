@@ -41,6 +41,7 @@ public
 
   def new
     @device = Device.new
+    @device.modular = 1
   end
 
   def create
