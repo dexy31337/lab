@@ -19,8 +19,8 @@
 <p><label for="device_device_id">Родительское устройство</label>
 <%= select 'device', 'device_id', Device.find( :all,:order => :labnumber, :conditions => 'modular = 1').collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
 
-<p><label for="device_modular">He может быть родителским</label>
-<%= check_box 'device','modular',{},'0','1' %></p>
+<p><label for="device_modular">Mожет быть родителским</label>
+<%= check_box 'device','modular',{},'1','0' %></p>
 
 <p><label for="device_location">Местоположение</label>
 <%= select 'device', 'location',["В коробке","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15"] %></p>
