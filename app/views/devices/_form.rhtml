@@ -17,9 +17,9 @@
 <%= text_field 'device', 'labnumber'  %></p>
 
 <p><label for="device_device_id">Родительское устройство</label>
-<%= select 'device', 'device_id', Device.find( :all,:order => :labnumber).collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
+<%= select 'device', 'device_id', Device.find( :all,:order => :labnumber, :conditions => 'modular = 1').collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
 
-<p><label for="device_modular">Модульная структура</label>
+<p><label for="device_modular">Может быть родителским</label>
 <%= check_box 'device','modular',{:checked => 'checked'},'1','0' %></p>
 
 <p><label for="device_location">Местоположение</label>
