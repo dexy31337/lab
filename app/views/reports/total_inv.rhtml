@@ -10,33 +10,15 @@
 			<TD width="15%">S/N</TD>
 			<TD width="15%">Комментарии</TD>
 		</TR>
-      		<% @col = 1 %>
-		<% @devs.each do |dev| %>
-      		<%	if (@col >= 2)
-		        	@col=1
-		      	else
-		        	@col=@col+1
-		      	end
-			%>
-		<TR bgcolor="<%= '#d6d8e1' if @col==1 %><%= '#eef0f7' if @col==2 %>">
-			<TD><%= dev.location %></TD>
-			<TD><%= dev.vendor.name %></TD>
-			<TD><%= dev.labnumber %></TD>
-			<TD><%= dev.partnumber %></TD>
-			<TD><%= dev.serialnumber %></TD>
-			<TD><%= dev.comment %></TD>
-		</TR>
-			<% Device.find(:all,:conditions => 'device_id = '+dev.id.to_s).each do |subdev| %>
-			<TR bgcolor="<%= '#d6d8e1' if @col==1 %><%= '#eef0f7' if @col==2 %>">
-
-				<TD><%= subdev.location %></TD>
-				<TD><%= subdev.vendor.name %></TD>
-				<TD><%= subdev.labnumber %>(в <%= dev.labnumber %>)</TD>
-				<TD><%= subdev.partnumber %></TD>
-				<TD><%= subdev.serialnumber %></TD>
-				<TD><%= subdev.comment %></TD>
-			</TR>
-			<% end %>
+      		<%
+		@col = 1
+		@devs.each do |curdev|
+      			if (@col >= 2)
+		       		@col=1
+			else
+			       	@col=@col+1
+			end %>
+			<%= render :partial => "dev_total_inv",:locals => {:dev => curdev,:col => @col} %>
 		<% end %>
 	</TABLE>
 </div>

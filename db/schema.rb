@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(:version => 8) do
     t.column "engineer_id", :integer
   end
 
-  add_index "reservations", ["engineer_id"], :name => "fk_reservation_engineer"
+  add_index "reservations", ["engineer_id"], :name => "fk_erservation_engineer"
 
   create_table "serving_properties", :force => true do |t|
     t.column "cpu_count", :integer
