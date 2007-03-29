@@ -1,0 +1,5 @@
+<%= prefix if prefix%>
+&nbsp;<%= link_to dev.name + " (" + dev.labnumber + ")", :controller => 'devices', :action => 'show', :id => dev.id %><br/>
+<% dev.devices.each do |subdev| %>
+<%= render :partial => 'show', :locals => {:dev => subdev,:prefix => prefix.to_s + '&nbsp;>'} %>
+<% end %>

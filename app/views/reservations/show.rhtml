@@ -7,7 +7,8 @@
 <br/>
 Список устройств :<br/>
 <% @reservation.devices.collect.each do |dev| %>
-  <%= link_to dev.name + " (" + dev.labnumber + ")", :controller => 'devices', :action => 'show', :id => dev.id %><br/>
+  <%= render :partial => 'show', :locals => {:dev => dev, :prefix => ''} %>
+  <br/>
 <% end %>
 <br/>
 

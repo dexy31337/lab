@@ -20,7 +20,7 @@
      <TD><%= link_to  reservation.engineer.last + ' ' + reservation.engineer.first, {:action=>"show", :id=>reservation.id} %></TD>
        <TD><%= link_to reservation.start.strftime("%d-%b-%y"), {:action=>"show", :id=>reservation.id} %></TD>
       <TD><% 'истекло' if (Time.now != reservation.end)%><%= link_to reservation.end.strftime("%d-%b-%y"), {:action=>"show", :id=>reservation.id} %></TD>
-      <TD><%= reservation.devices.count %></TD>
+      <TD><%= reservation.devices.find(:all,:conditions => 'device_id is NULL').collect.length %></TD>
       <TD><%= reservation.comment %></TD>
       <TD>
       <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>reservation.id} %>
