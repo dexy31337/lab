@@ -6,7 +6,7 @@
 <%= @reservation.comment.to_s %> <br>
 <br/>
 Список устройств :<br/>
-<% @reservation.devices.collect.each do |dev| %>
+<% @reservation.devices.find(:all,:conditions => 'device_id is NULL').collect.each do |dev| %>
   <%= render :partial => 'show', :locals => {:dev => dev, :prefix => ''} %>
   <br/>
 <% end %>
