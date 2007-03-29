@@ -5,7 +5,7 @@
 Комментарий:<br>
 <%= @reservation.comment.to_s %> <br>
 <br/>
-Список устройств :<br/>
+<h2>Список устройств :</h2><br/>
 <% @col=1 %>
 <table border=0>
 <% @reservation.devices.find(:all,:conditions => 'device_id is NULL').collect.each do |dev| %>
