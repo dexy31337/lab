@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: UPGRADING</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href=".././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>UPGRADING</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>UPGRADING
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Sun Apr 01 17:30:33 +0400 2007</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Upgrading from <a href="../classes/Engines.html">Engines</a> 1.1.x to <a href="../classes/Engines.html">Engines</a> 1.2.x</h1>
+<p>
+The 1.2 release of the engines plugin represents a significant rewrite of
+the internals. Now less intrusive into the core frameworks, it&#8216;s even
+simpler for plugin developers to make more flexible plugins than <a
+href="../classes/Rails.html">Rails</a> typically allows.
+</p>
+<p>
+However, as a consequence of change, you may need to make some adjustments
+to your application to get the most benefit. These are outlined below:
+</p>
+<h2>In your application</h2>
+<p>
+The following changes will affect code in applications which use the
+engines plugin
+</p>
+<h3>Change the engine_schema table to plugin_schema</h3>
+<p>
+Because the engines plugin now works universally for any <a
+href="../classes/Rails.html">Rails</a> plugin, the table used to store
+migration information has been renamed appropriately. We can also play
+nicely with other plugin_migration implementations by supporting this
+convention.
+</p>
+<h3>Rename RAILS_ROOT/public/engine_files to RAILS_ROOT/public/plugin_assets</h3>
+<p>
+Similarly, any plugin can now share stylesheets, images and so on via an
+assets folder, so the destination within the main public directory has been
+renamed to reflect this. You can simply delete the
+RAILS_ROOT/public/engine_files directory; the new one will be generated the
+next time your application starts.
+</p>
+<h3>The engine_image, engine_stylesheet and engine_javascript helpers have been replaced with enhanced versions of the normal <a href="../classes/Rails.html">Rails</a> asset helpers</h3>
+<p>
+Now, it&#8216;s simple to include an image from any plugin, by adding a
+plugin key to the helper&#8216;s options hash:
+</p>
+<pre>
+  image_tag &quot;image.png&quot;, :plugin =&gt; &quot;my_plugin&quot;
+</pre>
+<p>
+A similar convention exists for stylesheets and javascript files.
+Additionally, the old behaviour of automatically including assets which
+match the &quot;engine&quot;&#8217;s name has been dropped - only the files
+you explicitly request are included.
+</p>
+<h3>Engines.start is replaced with config.plugins</h3>
+<p>
+<a href="../classes/Rails.html">Rails</a>&#8217; native configuration
+object now includes an array for specifying which plugins are loaded, and
+in what order. The engines plugin enhances this feature with a
+&quot;*&quot; wildcard, so that you can load any order-sensitive plugins,
+and then the rest in any order.
+</p>
+<pre>
+  config.plugins = [&quot;engines&quot;, &quot;some_plugin&quot;, &quot;another_plugin&quot;, &quot;*&quot;]
+</pre>
+<p>
+It&#8216;s worth noting that the engines plugin no longer needs to be
+specifically loaded first, so most people can happily ignore the
+config.plugins array without any problems.
+</p>
+<h3>The &quot;config&quot; method for &quot;engine&quot;-style configuration is no longer loaded by default.</h3>
+<p>
+See below.
+</p>
+<h3>Any &quot;engines&quot; type rake tasks are now &quot;plugin&quot; tasks.</h3>
+<p>
+The following rake tasks are now provided by the engines plugin for
+operating on your application&#8216;s plugins (whenever a task can operate
+on a single plugin, this can be controlled by specifying
+PLUGIN=&lt;name&gt; on the commandline):
+</p>
+<pre>
+  db:fixtures:plugins:load  # load fixtures from plugins.
+
+  test:plugins:units        # Run tests from within &lt;plugins&gt;/test/units
+  test:plugins:functional   # Run tests from within &lt;plugins&gt;/test/functional
+  test:plugins:integration  # Run tests from within &lt;plugins&gt;/test/integration
+  test:plugins              # Run all tests from within &lt;plugins&gt;/test/*
+
+  doc:plugins               # Run full rdoc against all source files within all plugins
+  doc:plugins:&lt;plugin&gt;      # Run full rdoc against all source files within the given plugin
+</pre>
+<h2>In your &quot;engine&quot;-style plugins</h2>
+<p>
+If you have developed or are using plugins that leverage engines
+enhancements, you need to be aware of the following changes in engines 1.2.
+</p>
+<h3>init_engine.rb is no longer required</h3>
+<p>
+Please now create init.rb files, just as you&#8216;d find in
+&quot;normal&quot; plugins. Remember - there&#8216;s no such thing as
+&quot;an engine&quot; anymore.
+</p>
+<h3>The &quot;fixture&quot; method for loading tests from arbitrary files</h3>
+<p>
+Supporting this was just too difficult, and it seems like the combination
+of <a href="../classes/Rails.html">Rails</a>&#8217; own lack of
+enhancements regarding this feature, along with the mind-shift against
+static fixtures, meant that it simply was too much work to continue to
+support.
+</p>
+<p>
+The only reason this mechanism originally existed was to support plugins
+which couldn&#8216;t predict the names of the tables that models might be
+stored in. This is now a discouraged behaviour.
+</p>
+<h3><a href="../classes/Engines.html#M000020">Engines.current</a>.version has changed its behaviour slightly.</h3>
+<p>
+The engines plugin used to provide a simple way to store version
+information about plugins. This has now been superceded by including that
+information in an about.yml file, which any plugin can use.
+</p>
+<h3>The &quot;config&quot; method is not included, by default.</h3>
+<p>
+Where previously developers could use the &quot;config&quot; method to
+define configuration, this is now deprecated in favour of using
+mattr_accessor directly in the <a href="../classes/Module.html">Module</a>.
+However, if you still <b>need</b> to use the config method, it is included
+but must be explicitly required, probably near the top of environment.rb:
+</p>
+<pre>
+  require File.join(RAILS_ROOT, &quot;vendor&quot;, &quot;plugins&quot;, &quot;engines&quot;,
+                    &quot;lib&quot;, &quot;engines&quot;, &quot;deprecated_config_support&quot;)
+</pre>
+<h3>Public assets should now be stored in a subdirectory of your plugin called &quot;assets&quot;, rather than &quot;public&quot;.</h3>
+<p>
+This clarifies the nature of this directory; it is not made public itself,
+but rather is a container for files which should be made accessible from
+the web.
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>
