@@ -20,8 +20,11 @@ config.action_view.debug_rjs                         = true
 # Don't care if the mailer can't send
 config.action_mailer.raise_delivery_errors = false
 
-ActionMailer::Base.server_settings = {
+ActionMailer::Base.smtp_settings = {
 :address => "192.168.10.253",
-:port => 25
+:port => 25,
+:user_name => 'nvision\malin',
+:password => '_MMbPP',
+:authentication => :login
 }
 

@@ -5,7 +5,7 @@
 # ENV['RAILS_ENV'] ||= 'production'
 
 # Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '1.1.6'
+RAILS_GEM_VERSION = '1.2.3'
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
@@ -39,6 +39,7 @@ Rails::Initializer.run do |config|
   # config.active_record.default_timezone = :utc
   
   # See Rails::Configuration for more options
+  #config.plugins = ["engines", "active_rbac"]
 end
 
 # Add new inflection rules using the following format 
@@ -51,10 +52,7 @@ end
 # end
 
 # Include your application configuration below
+ActiveRbac.controller_layout = "engineers" 
+ActiveRbac.mailer_from = "mtv@nvg.ru"
+#Engines.start :active_rbac
 
-module ActiveRbacConfig
-  #controller and lyout configuration
-  config :controller_layout, "engineers"
-end
-
-Engines.start :active_rbac
