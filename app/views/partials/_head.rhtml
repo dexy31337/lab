@@ -9,53 +9,57 @@
 <body>
 
 <p style="color: green"><%= flash[:notice] %></p>
+<p style="color: green">
+       <% if !current_user.nil? %>
+    	<%= current_user.login %>
+    	
+    	<% current_user.roles.each do |role| %>
+    	{ <%= role.title %> }
+    	<% end %>
+    <% end %>
+</p>
 <table border="0" width="60%" cellpadding="0" align="center">
   <TR>
 	<% menu_array = [['Устройства','devices','list']]
-#	if(current_user.has_role?('PowerUser'))
+	if(current_user.has_role?('PowerUser'))
 		menu_array[menu_array.length] = ['Кроссировки','interfaces','showcross']
 		menu_array[menu_array.length] = ['Резервации','reservations','list']
 		menu_array[menu_array.length] = ['Инженеры','engineers','list']
 		menu_array[menu_array.length] = ['Отчеты','reports','list']
-#	end
-#	unless session[:rbac_user_id].nil?
-#		menu_array[menu_array.length] = ['Выход','access','logout']
-#	else
-#		menu_array[menu_array.length] = ['Вход','access','login']
-#	end
+	end
+	unless session[:rbac_user_id].nil?
+		menu_array[menu_array.length] = ['Выход','access','logout']
+	else
+		menu_array[menu_array.length] = ['Вход','access','login']
+		menu_array[menu_array.length] = ['Регистрация','active_rbac/registration','register']
+	end
 
 	menu_array.each do |entry| %>
 	<TD align="center" valign="middle">
-		<%= link_to image_tag(entry[1], :size => "32x32", :border => 0), {:controller => "/"+entry[1], :action => entry[2]} %>
+		<%= link_to image_tag(entry[1]+'.png', :size => "32x32", :border => 0), {:controller => "/"+entry[1], :action => entry[2]} %>
 	</TD>
 	<TD align ="left">
 		<%= link_to entry[0],{:controller => "/"+entry[1], :action => entry[2]} %>
 	</TD>
 	<% end %>
-<!-- Obsolete
-    <TD align="center" valign="middle">
-<%= link_to image_tag("devices", :size => "32x32", :border => 0), {:controller => "/devices", :action => "list"} %></TD>
-    <td align ="left">
-<%= link_to "Устройства",{:controller => "/devices", :action => "list"} %></TD>
-    <TD align="center" valign="middle">
-<%= link_to image_tag("interfaces", :size => "32x32", :border => 0), {:controller => "/interfaces", :action => "showcross"} %></TD>
-    <td align ="left">
-<%= link_to "Кроссировки",{:controller => "/interfaces", :action => "showcross"} %></TD>
-    <TD align="center" valign="middle">
-<%= link_to image_tag("reservations", :size => "32x32", :border => 0), {:controller => "/reservations", :action => "list"} %></TD>
-    <td align ="left">
-<%= link_to "Резервации",{:controller => "/reservations", :action => "list"} %></TD>
-    <TD align="center" valign="middle">
-<%= link_to image_tag("engineers", :size => "32x32", :border => 0), {:controller => "/engineers", :action => "list"} %></TD>
-    <td align ="left">
-    <%= link_to "Инженеры",{:controller => "/engineers", :action => "list"} %></TD>
-<%= link_to "Отчеты",{:controller => "/reports", :action => "list"} %></TD>
-    <TD align="center" valign="middle">
-<%= link_to image_tag("reports", :size => "32x32", :border => 0), {:controller => "/reports", :action => "list"} %></TD>
-    <td align ="left">
-    <%= link_to "Отчеты",{:controller => "/reports", :action => "list"} %></TD>
-    -->
-  </TR>
+	</TR><TR>
+	<% if current_user.has_role?('Admin')
+		menu_array = [
+		['Пользователи','user','index'],
+		['Группы','group','index'],
+		['Роли','role','index'],
+		['Статические права','static_permission','index']
+		]
+		menu_array.each do |entry| %>
+		<TD align="center" valign="middle">
+			<%= link_to image_tag(entry[1]+'.png', :size => "32x32", :border => 0), {:controller => "active_rbac/"+entry[1], :action => entry[2]} %>
+		</TD>
+		<TD align ="left">
+			<%= link_to entry[0],{:controller => "active_rbac/"+entry[1], :action => entry[2]} %>
+		</TD>
+		<% end %>
+	<% end %>
+</TR>
 </table>
 <br/>
 <%= @content_for_layout %>

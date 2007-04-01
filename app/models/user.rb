@@ -26,7 +26,7 @@ class User < ActiveRecord::Base
 
   validates_length_of :login, :within => 3..40
   validates_length_of :password, :within => 5..40
-  validates_presence_of :login, :password, :password_confirmation
+  validates_presence_of :login, :password
   validates_uniqueness_of :login, :on => :create
   validates_confirmation_of :password, :on => :create     
 end
