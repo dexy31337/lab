@@ -1,9 +1,10 @@
 class InterfaceTypesController < ApplicationController
+
 before_filter :protect_controller
 
 protected
   def protect_controller
-    if current_user.has_role?("PowerUser")
+    if current_user.has_role?('PowerUser')
       return true
     else
       redirect_to "/devices/index"
