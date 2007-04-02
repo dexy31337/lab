@@ -1,13 +1,4 @@
 <h1>Кроссировки</h1>
-<%= javascript_tag '
-function f(event)
-{ 
-x = event.x?event.x:event.pageX?event.pageX:100;
-y = event.y?event.y:event.pageY?event.pageY:100;
-document.getElementById("toolbox").style.top = y-20;
-document.getElementById("toolbox").style.left = x-20;
-}'
-%>
 <TABLE border=0 cellpadding=1>
 <TR>
 <% @cross.interfaces.each do |int| %>
@@ -27,5 +18,13 @@ document.getElementById("toolbox").style.left = x-20;
 <% end %>
 </TR>
 </TABLE>
-<div id="toolbox" class="toolbox" onblur="document.getElementById('toolbox').style.visibility = 'hidden'"></div>
-
+<div id="toolbox" class="toolbox" onblur="document.getElementById('toolbox').style.visibility = 'hidden'" style="position:absolute"></div>
+<script language="JavaScript1.2">
+<!--
+function f(event)
+{ 
+document.getElementById("toolbox").style.left = event.pageX-20+"px";
+document.getElementById("toolbox").style.top = event.pageY-20+"px";
+}
+-->
+</script>

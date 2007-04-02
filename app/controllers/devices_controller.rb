@@ -7,7 +7,7 @@ class DevicesController < ApplicationController
 
 protected
   def protect_controller
-    if current_user.has_role?("Admin")
+    if current_user.has_role?("dev_editor")
       return true
     else
       redirect_to "/devices/index"
@@ -40,11 +40,21 @@ public
   end
 
   def new
+    if !current_user.has_role?("dev_admin")
+      redirect_to "/devices/index"
+      flash[:notice] = "Не достаточно прав!"
+      return false
+    end
     @device = Device.new
     @device.modular = 1
   end
 
   def create
+    if !current_user.has_role?("dev_editor","dev_admin")
+      redirect_to "/devices/index"
+      flash[:notice] = "Не достаточно прав!"
+      return false
+    end
     @device = Device.new(params[:device])
     if params[:serving_property] != nil
     	@serving_property = ServingProperty.new(params[:serving_property])
@@ -95,6 +105,11 @@ public
   end
 
   def destroy
+    if !current_user.has_role?("dev_admin")
+      redirect_to "/devices/index"
+      flash[:notice] = "Не достаточно прав!"
+      return false
+    end
     Device.find(params[:id]).destroy
     redirect_to :action => 'index'
   end

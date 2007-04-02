@@ -7,17 +7,7 @@
   <%= stylesheet_link_tag 'scaffold' %>
 </head>
 <body>
-
-<p style="color: green"><%= flash[:notice] %></p>
-<p style="color: green">
-       <% if !current_user.nil? %>
-    	<%= current_user.login %>
-    	
-    	<% current_user.roles.each do |role| %>
-    	{ <%= role.title %> }
-    	<% end %>
-    <% end %>
-</p>
+<div style="color: green"><%= flash[:notice] %></div>
 <table border="0" width="60%" cellpadding="0" align="center">
   <TR>
 	<% menu_array = [['Устройства','devices','list']]
