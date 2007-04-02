@@ -9,7 +9,7 @@
 				   	    }, 
 			      	      :before => 'document.getElementById("toolbox").style.visibility = "hidden"', 
 			              :complete => 'document.getElementById("toolbox").style.visibility = "visible"'},
-			      	      {:onclick => 'f(event)', :class => 'crosslabel'} %>
+			      	      {:onclick => 'GetCoord(event);', :class => 'crosslabel'} %>
 </center></TD></TR>
 <TR><TD class='crosslabel'>
 <center><%= int.interface.name if int.interface %>&nbsp;</center>
@@ -21,10 +21,18 @@
 <div id="toolbox" class="toolbox" onblur="document.getElementById('toolbox').style.visibility = 'hidden'" style="position:absolute"></div>
 <script language="JavaScript1.2">
 <!--
-function f(event)
-{ 
-document.getElementById("toolbox").style.left = event.pageX-20+"px";
-document.getElementById("toolbox").style.top = event.pageY-20+"px";
-}
+   function GetCoord(e)
+   {
+   if (navigator.appName == "Microsoft Internet Explorer"){
+   cX = event.clientX + document.documentElement.scrollLeft;
+   cY = event.clientY + document.documentElement.scrollTop;
+   }
+   else {
+   cX = e.pageX;
+   cY = e.pageY;
+   }
+   document.getElementById("toolbox").style.left = cX-20+"px"
+   document.getElementById("toolbox").style.top = cY-20+"px"
+   }
 -->
 </script>

@@ -5,6 +5,8 @@
   <title><%= title.to_s %></title>
   <%= javascript_include_tag "prototype" %>
   <%= stylesheet_link_tag 'scaffold' %>
+  <link rel="shortcut icon" href="http://192.168.157.1/favicon.ico" type="image/vnd.microsoft.icon" />
+  <link rel="icon" href="http://192.168.157.1/favicon.ico" type="image/vnd.microsoft.icon" /> 
 </head>
 <body>
 <div style="color: green"><%= flash[:notice] %></div>
@@ -25,10 +27,10 @@
 	end
 
 	menu_array.each do |entry| %>
-	<TD align="center" valign="middle">
+	<TD align="center" valign="middle" width="<%= 100/(3*menu_array.length) %>%">
 		<%= link_to image_tag(entry[1]+'.png', :size => "32x32", :border => 0), {:controller => "/"+entry[1], :action => entry[2]} %>
 	</TD>
-	<TD align ="left">
+	<TD align ="left" width="<%= 200/(3*menu_array.length) %>%">
 		<%= link_to entry[0],{:controller => "/"+entry[1], :action => entry[2]} %>
 	</TD>
 	<% end %>
