@@ -1,5 +1,18 @@
 class InterfacesController < ApplicationController
 
+before_filter :protect_controller, :except => [:list, :show, :index, :search, :showcross]
+
+protected
+  def protect_controller
+    if current_user.has_role?("cross_editor","int_editor")
+      return true
+    else
+      redirect_to "/interfaces/showcross"
+      flash[:notice] = "Не достаточно прав!"
+      return false
+    end
+  end
+public
   def index
     list
     render :action => 'list'
@@ -66,7 +79,6 @@ class InterfacesController < ApplicationController
   end
   
   def showcross
-    @cross = Device.find(:first,:conditions => "labnumber = '_cross'")
   end
   
   def uncross

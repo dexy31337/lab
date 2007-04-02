@@ -7,7 +7,7 @@ class DevicesController < ApplicationController
 
 protected
   def protect_controller
-    if current_user.has_role?("dev_editor")
+    if current_user.has_role?("dev_editor","dev_admin")
       return true
     else
       redirect_to "/devices/index"
@@ -110,6 +110,7 @@ public
       flash[:notice] = "Не достаточно прав!"
       return false
     end
+
     Device.find(params[:id]).destroy
     redirect_to :action => 'index'
   end

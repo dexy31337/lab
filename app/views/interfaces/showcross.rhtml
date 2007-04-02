@@ -1,15 +1,20 @@
 <h1>Кроссировки</h1>
 <TABLE border=0 cellpadding=1>
 <TR>
-<% @cross.interfaces.each do |int| %>
+<% Device.find(:first,:conditions => "labnumber = '_cross'").interfaces.each do |int| %>
 <TD><br/><table border=1 bordercolor='black' cellspacing=0><TR><TD width="36px" bgcolor="#ABCDEF">
-<center><%= link_to_remote int.name, {:update => :toolbox,
+<center>
+<% if current_user.has_role?('cross_editor') %>
+<%= link_to_remote int.name, {:update => :toolbox,
 			      	      :url=>{:action => 'toolbox', 
 			             	    :id => int.id
 				   	    }, 
 			      	      :before => 'document.getElementById("toolbox").style.visibility = "hidden"', 
 			              :complete => 'document.getElementById("toolbox").style.visibility = "visible"'},
 			      	      {:onclick => 'GetCoord(event);', :class => 'crosslabel'} %>
+<% else %>
+<%= int.name %>
+<% end %>
 </center></TD></TR>
 <TR><TD class='crosslabel'>
 <center><%= int.interface.name if int.interface %>&nbsp;</center>
@@ -18,6 +23,7 @@
 <% end %>
 </TR>
 </TABLE>
+<% if current_user.has_role?('cross_editor') %>
 <div id="toolbox" class="toolbox" onblur="document.getElementById('toolbox').style.visibility = 'hidden'" style="position:absolute"></div>
 <script language="JavaScript1.2">
 <!--
@@ -36,3 +42,4 @@
    }
 -->
 </script>
+<% end %>

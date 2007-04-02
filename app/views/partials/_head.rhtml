@@ -10,14 +10,15 @@
 </head>
 <body>
 <div style="color: green"><%= flash[:notice] %></div>
-<table border="0" width="60%" cellpadding="0" align="center">
+<table border="0" width="85%" cellpadding="0" align="center">
   <TR>
-	<% menu_array = [['Устройства','devices','list']]
+	<% menu_array = [['Устройства','devices','list'],['Кроссировки','interfaces','showcross']]
 	if(current_user.has_role?('PowerUser'))
-		menu_array[menu_array.length] = ['Кроссировки','interfaces','showcross']
+		
 		menu_array[menu_array.length] = ['Резервации','reservations','list']
 		menu_array[menu_array.length] = ['Инженеры','engineers','list']
 		menu_array[menu_array.length] = ['Отчеты','reports','list']
+		menu_array[menu_array.length] = ['Производители','vendors','list']
 	end
 	unless session[:rbac_user_id].nil?
 		menu_array[menu_array.length] = ['Выход','access','logout']

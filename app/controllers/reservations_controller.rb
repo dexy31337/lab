@@ -1,5 +1,18 @@
 class ReservationsController < ApplicationController
+before_filter :protect_controller
 
+protected
+  def protect_controller
+    if current_user.has_role?("PowerUser")
+      return true
+    else
+      redirect_to "/devices/index"
+      flash[:notice] = "Не достаточно прав!"
+      return false
+    end
+  end
+  
+public
   def index
     list
     render :action => 'list'
