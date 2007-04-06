@@ -31,10 +31,14 @@ public
   
   def search
     searchquery = '('+params[:searchfield].to_s + " LIKE '%" + params[:searchtext].to_s + "%')"
+    if !current_user.has_role?('PowerUser')
+    	searchquery += 'AND labnumber LIKE \'L%\''
+    end
     searchquery += ' AND (reservation_id IS NOT NULL)'if params[:searchdevices] == 'reserved'
     searchquery += ' AND (reservation_id IS NULL)'if params[:searchdevices] == 'free'
     searchquery += ' AND (device_id IS NULL)' if params[:searchdevtype] == 'chasis'
     searchquery += ' AND (device_id IS NOT NULL)' if params[:searchdevtype] == 'modules'
+    
     @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => @params[:order], :conditions=> searchquery
     render :partial=>'search'
   end
