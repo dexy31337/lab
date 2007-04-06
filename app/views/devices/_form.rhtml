@@ -1,35 +1,40 @@
 <%= error_messages_for 'device' %>
 
 <!--[form:device]-->
-<p><label for="device_vendor_id">Производитель</label>
-<%= select 'device', 'vendor_id', Vendor.find_all.collect {|d| [ d.name, d.id ] } %></p>
-
-<p><label for="device_name">Название</label>
-<%= text_field 'device', 'name'  %></p>
-
-<p><label for="device_partnumber">Партномер</label>
-<%= text_field 'device', 'partnumber'  %></p>
-
-<p><label for="device_serialnumber">Серийный номер</label>
-<%= text_field 'device', 'serialnumber'  %></p>
-
-<p><label for="device_labnumber">Инвентарный номер</label>
-<%= text_field 'device', 'labnumber'  %></p>
+<table border="0">
+	<tr>
+		<td><label for="device_vendor_id">Производитель</label></td>
+		<td><label for="device_name">Название</label></td>
+		<td><label for="device_partnumber">Партномер</label></td>
+		<td><label for="device_serialnumber">Серийный номер</label></td>
+		<td><label for="device_labnumber">Инвентарный номер</label></td>
+	</tr>
+	<tr>
+		<td><%= select 'device', 'vendor_id', Vendor.find_all.collect {|d| [ d.name, d.id ] } %></td>
+		<td><%= text_field 'device', 'name'  %></td>
+		<td><%= text_field 'device', 'partnumber'  %></td>
+		<td><%= text_field 'device', 'serialnumber'  %></td>
+		<td><%= text_field 'device', 'labnumber'  %></td>
+	</tr>
+</table>
 
 <p><label for="device_device_id">Родительское устройство</label>
 <%= select 'device', 'device_id', Device.find( :all,:order => :labnumber, :conditions => 'modular = 1').collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
 
-<p><label for="device_modular">Mожет быть родительским</label>
-<%= check_box 'device','modular',{},'1','0' %></p>
-
-<p><label for="device_location">Местоположение</label>
-<%= select 'device', 'location',["В коробке","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15"] %></p>
-
-<p><label for="device_box_location">Местоположение коробки</label>
-<%= select 'device', 'box_location',["Нет","S0-1","S0-2","S1-1-R1","S1-1-R2","S1-2-R1","S1-2-R2","S1-3-R1","S1-3-R2","S2-1","S2-2","S2-3","S3-1","S3-2","S3-3","B1-1","B1-2","B1-3","M1-1","M1-2","M1-3","LAB-1-1","LAB-1-2","LAB-1-3","LAB-1-4","LAB-2-1","LAB-2-2","LAB-2-3","LAB-2-4","LAB-3-1","LAB-3-2","LAB-3-3","LAB-3-4"] %></p>
-
+<table border="0">
+	<tr>
+		<td></td>
+		<td><label for="device_location">Местоположение</label></td>
+		<td><label for="device_box_location">Местоположение коробки</label></td>
+	</tr>
+	<tr>
+		<td><%= check_box 'device','modular',{},'1','0' %><label for="device_modular">Mожет быть родительским</label></td>
+		<td><%= select 'device', 'location',["В коробке","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15"] %></td>
+		<td><%= select 'device', 'box_location',["Нет","S0-1","S0-2","S1-1-R1","S1-1-R2","S1-2-R1","S1-2-R2","S1-3-R1","S1-3-R2","S2-1","S2-2","S2-3","S3-1","S3-2","S3-3","B1-1","B1-2","B1-3","M1-1","M1-2","M1-3","LAB-1-1","LAB-1-2","LAB-1-3","LAB-1-4","LAB-2-1","LAB-2-2","LAB-2-3","LAB-2-4","LAB-3-1","LAB-3-2","LAB-3-3","LAB-3-4"] %></td>
+	</tr>
+</table>
 <p><label for="device_comment">Комментарии</label><br/>
-<%= text_area 'device', 'comment' %></p>
+<%= text_area 'device', 'comment', {:rows => '5', :cols =>'80'} %></p>
 <p>
   <label>Интерфейсы</label>
   <ul>

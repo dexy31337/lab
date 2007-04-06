@@ -31,8 +31,10 @@ class ActiveRbac::RegistrationController < ActiveRbac::ComponentController
 
       @user = User.new(params[:user])
       @user.password_hash_type = ActiveRbac.model_default_hash_type
-
+      @user.update_password(params[:password])
       if @user.save then
+        @user.update_password(params[:password])
+        @user.save
         @user.create_user_registration
 
         # The confirm_url should be set in the mailer, but seemingly the url methods

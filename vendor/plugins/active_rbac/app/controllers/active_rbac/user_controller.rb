@@ -54,9 +54,12 @@ public
 
       # set password hash type seperatedly because it is protected
       @user.password_hash_type = params[:user][:password_hash_type]
+      @user.update_password(params[:password])
     
       # assign properties to user
       if @user.save
+        @user.update_password(params[:password])
+        @user.save
         # set the user's roles to the roles from the parameters 
         params[:user][:roles] = [] if params[:user][:roles].nil?
         @user.roles = params[:user][:roles].collect { |i| Role.find(i) }
