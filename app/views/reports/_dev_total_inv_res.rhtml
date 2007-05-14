@@ -1,0 +1,20 @@
+<TR bgcolor="<%= '#d6d8e1' if col==1 %><%= '#eef0f7' if col==2 %>">
+<% if dev %>
+			<TD><%= dev.location %></TD>
+			<TD><%= dev.vendor.name %></TD>
+			<TD><%= dev.labnumber %><%= "(в "+dev.device.labnumber.to_s+")" if dev.device %></TD>
+			<TD><%= dev.partnumber %></TD>
+			<TD><%= dev.serialnumber %></TD>
+			<% if dev.reservation %>
+
+			<TD><%= dev.reservation.engineer.last+' '+dev.reservation.engineer.first %> </TD>
+			<TD><%= dev.reservation.end.strftime("%d-%b-%y") %></TD>
+			<% else %>
+			<TD></TD>
+			<TD></TD>
+			<% end %>
+</TR>
+<% dev.devices.each do |subdev| %>
+	<%= render :partial => 'dev_total_inv_res', :locals => {:dev => subdev,:col => col} %>
+<% end %>
+<% end %>

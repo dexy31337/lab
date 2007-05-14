@@ -1,0 +1,25 @@
+<h1>Инвентаризация</h1>
+
+<div align="center">
+	<TABLE border="1" bordercolor="black" width="100%" cellspacing="0" cellpadding="1">
+		<TR>
+			<TD width="7%">Стойка</TD>
+			<TD width="8%">Производитель</TD>
+			<TD width="20%">L/N</TD>
+			<TD width="15%">P/N</TD>
+			<TD width="15%">S/N</TD>
+			<TD width="8%">Зарезервировано</TD>
+			<TD width="7%">Срок</TD>
+		</TR>
+      		<%
+		@col = 1
+		@devs.each do |curdev|
+      			if (@col >= 2)
+		       		@col=1
+			else
+			       	@col=@col+1
+			end %>
+			<%= render :partial => "dev_total_inv_res",:locals => {:dev => curdev,:col => @col} %>
+		<% end %>
+	</TABLE>
+</div>
