@@ -19,7 +19,7 @@ public
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
+  verify :method => "post", :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
 
   def list
@@ -49,8 +49,8 @@ public
   end
 
   def update
-    @interface = Interface.find(@params["id"])
-    @interface.attributes = @params["interface"]
+    @interface = Interface.find(params["id"])
+    @interface.attributes = params["interface"]
     if(@interface.interface)
       @interface.interface.interface_id = nil
       @interface.interface.save
@@ -62,7 +62,7 @@ public
       end
     @interface.save
     flash[:notice] = "Done"
-    redirect_to :action => :edit, :id => @params[:id]
+    redirect_to :action => :edit, :id => params[:id]
   end
   
   def destroy
@@ -82,7 +82,7 @@ public
   end
   
   def uncross
-    @interface = Interface.find(@params["id"])
+    @interface = Interface.find(params["id"])
     if(@interface.interface)
       @interface.interface.interface_id = nil
       @interface.interface.save
@@ -94,8 +94,8 @@ public
   end
 	
   def cross
-    @interface = Interface.find(@params["id"])
-    @interface.interface_id = @params["interface_id"]
+    @interface = Interface.find(params["id"])
+    @interface.interface_id = params["interface_id"]
     @interface.save
     if(@interface.interface)
       @interface.interface.interface_id = @interface.id

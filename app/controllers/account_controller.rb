@@ -5,12 +5,12 @@ class AccountController < ApplicationController
 
   def login
     case @request.method
-      when :post
-        if @session['user'] = User.authenticate(@params['user_login'], @params['user_password'])
+      when :method => "post"
+        if @session['user'] = User.authenticate(params['user_login'], params['user_password'])
           flash['notice']  = "Login successful"
           redirect_back_or_default :action => "welcome"
         else
-          @login    = @params['user_login']
+          @login    = params['user_login']
           @message  = "Login unsuccessful"
       end
     end
@@ -18,10 +18,10 @@ class AccountController < ApplicationController
   
   def signup
     case @request.method
-      when :post
-        @user = User.new(@params['user'])
+      when :method => "post"
+        @user = User.new(params['user'])
         if @user.save
-          @session['user'] = User.authenticate(@user.login, @params['user']['password'])
+          @session['user'] = User.authenticate(@user.login, params['user']['password'])
           flash['notice']  = "Signup successful"
           redirect_back_or_default :action => "welcome"          
         end
@@ -31,8 +31,8 @@ class AccountController < ApplicationController
   end  
   
   def delete
-    if @params['id'] and @session['user']
-      @user = User.find(@params['id'])
+    if params['id'] and @session['user']
+      @user = User.find(params['id'])
       @user.destroy
     end
     redirect_back_or_default :action => "welcome"

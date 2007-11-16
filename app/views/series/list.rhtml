@@ -1,0 +1,20 @@
+<table border=0>
+<tr height="40%">
+<td>
+<p>
+<h3>Серии оборудования</h1>
+Выбирать из существующих:
+<%= select 'vendor',
+        'vendor_id',
+        Vendor.find(:all).collect{|v|[v.name,v.id]}.sort ,
+        {:include_blank => 'true'},
+        {:onchange => "new Ajax.Updater('series', '/series/v_series?vendor=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})"} %>
+<div id="series">
+</div>
+</p>
+<p>
+<%= link_to 'Созать новую', :action => 'new' %>
+</p>
+</td></tr>
+</table>
+

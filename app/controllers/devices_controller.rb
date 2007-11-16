@@ -2,7 +2,7 @@ class DevicesController < ApplicationController
 	
   before_filter :protect_controller, :except => [:list, :show, :index, :search]
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-#  verify :method => :post, :only => [ :destroy, :create, :update ],
+#  verify :method => "post", :only => [ :destroy, :create, :update ],
 #         :redirect_to => { :action => :list }
 
 protected
@@ -22,7 +22,7 @@ public
   end
 
   def list
-    @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => @params[:order]
+    @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => params[:order]
   end
 
   def show
@@ -38,8 +38,9 @@ public
     searchquery += ' AND (reservation_id IS NULL)'if params[:searchdevices] == 'free'
     searchquery += ' AND (device_id IS NULL)' if params[:searchdevtype] == 'chasis'
     searchquery += ' AND (device_id IS NOT NULL)' if params[:searchdevtype] == 'modules'
+    searchquery += (' AND (vendor_id = ' + params[:searchvendor].to_s + ')') if (params[:searchvendor] != nil and params[:searchvendor].to_s != 'all')
     
-    @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => @params[:order], :conditions=> searchquery
+    @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => params[:order], :conditions=> searchquery
     render :partial=>'search'
   end
 
@@ -129,5 +130,10 @@ public
   
   def render_no_servprops
     render :partial => 'no_server_props'
+  end
+  
+  def seriesadd
+    @series = Series.find(:all,:conditions => {:vendor_id => params[:vendor]})
+    render :partial => 'v_series'
   end
 end

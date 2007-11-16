@@ -1,0 +1,11 @@
+Step One<br>
+Select vendor
+<%= select 'vendor',
+	'vendor_id', 
+	Vendor.find(:all).collect{|v|[v.name,v.id]}.sort , 
+	{:include_blank => 'true'},
+	{:onchange => "new Ajax.Updater('step2', '/configurator/step_two?vendor=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})"} %>
+	<%#{:onchange => remote_function(:update => "step2",:url => {:action => "step_two",:with => {:vendor => '\'this.options\[this.selectedIndex\].value\''}})}%>
+<div id="step2">
+</div>
+ 

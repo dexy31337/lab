@@ -5,13 +5,13 @@
 <%= text_field 'interface', 'name'  %></p>
 
 <p><label for="interface_interface_type_id">Тип интерфейса</label><br/>
-<%= select 'interface', 'interface_type_id', InterfaceType.find_all.collect { |it| [ it.name , it.id ] } %></p>
+<%= select 'interface', 'interface_type_id', InterfaceType.find(:all).collect { |it| [ it.name , it.id ] } %></p>
 
 <p><label for="interface_interface_type_id">Устройство</label><br/>
-<%= select 'interface', 'device_id', Device.find_all.collect { |d| [ d.labnumber + " - " + d.name , d.id ] } %></p>
+<%= select 'interface', 'device_id', Device.find(:all).collect { |d| [ d.labnumber + " - " + d.name , d.id ] } %></p>
 
 <p><label for="interface_interface_type_id">Скроссировано в</label><br/>
-<%= select 'interface', 'interface_id', Interface.find_all.collect { |i| [ i.device.labnumber + " - " + i.device.name.to_s + " (" + i.name + ")" , i.id ] }, { :include_blank => 'true' } %></p>
+<%= select 'interface', 'interface_id', Interface.find(:all).collect { |i| [ i.device.labnumber + " - " + i.device.name.to_s + " (" + i.name + ")" , i.id ] }, { :include_blank => 'true' } %></p>
 
 <!--[eoform:interface]-->
 

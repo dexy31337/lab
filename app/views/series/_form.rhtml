@@ -1,0 +1,8 @@
+<%= error_messages_for 'series' %>
+<p><label for="series_vendor_id">Производитель</label>
+<%= select 'series', 'vendor_id', Vendor.find(:all).collect {|d| [ d.name, d.id ] } %>
+</p>
+<p><label for="series_name">Название</label>
+<%= text_field 'series', 'name'  %>
+</p>
+

@@ -1,0 +1,46 @@
+<% if @series.length == 0 %>
+Элементов нет
+<% else %>
+<%# @series.each do |s| %>
+<%# s.name %>
+<%# link_to_remote "Совместимость", :update => "series",:url => {:action => "compatibility",:id => s.id} %>
+<%# link_to "Править",{:action => "edit",:id => s.id}%>
+<%# link_to "Удалить",{:action => "delete",:id => s.id},:confirm => 'Are you sure?', :method => "delete" %><br>
+<%# end %>
+<%# end %>
+<style>
+<!--
+td.series {width:35px;height:22px;text-align:center;}
+-->
+</style>
+
+<table border="1" cellpadding="2" cellspacing="2">
+<tr>
+<td class="series"></td>
+<% @series.each do |s| %>
+<td class="series"><%=link_to s.name,{:action => "edit",:id => s.id} %></td>
+<% end %>
+<% @series.each do |s| %>
+<tr>
+
+<td class="series"><%= link_to s.name,{:action => "delete",:id => s.id},:confirm => 'Вы уверены, что хотите удалить ' + s.vendor.name + ' ' + s.name + '? (Повлечет за собой удаление ' + s.series.length.to_s + ' связей).', :method => "delete" %></td>
+
+<% @series.each do |c|%>
+<% if c == s %>
+<td bgcolor="#808080" class="series"> 
+
+</td>
+<% elsif s.series.include?(c) %> 
+<td class="series" onclick="if(confirm('Удалить связь между сериями <%= s.vendor.name + " " + s.name + " и " + c.name %> ?')) {new Ajax.Updater('series', '/series/modcompat?do=del&id=<%=s.id.to_s%>&series=<%= c.id %>', {asynchronous:true, evalScripts:true})}">
+<img src="/images/ok.png"/>
+</td>
+<% else%> <!-- - -->
+<td class="series" onclick="if(confirm('Добавить связь между сериями <%= s.vendor.name + " " + s.name + " и " + c.name %> ?')){new Ajax.Updater('series', '/series/modcompat?do=add&id=<%=s.id.to_s%>&series=<%= c.id %>', {asynchronous:true, evalScripts:true})}">
+<img src="/images/fileclose.png"/>
+</td>
+<% end %>
+<% end %>
+</tr>
+<% end %>
+</table>
+<% end %>

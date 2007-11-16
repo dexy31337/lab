@@ -1,54 +1,57 @@
 <%= link_to_remote 'Предыдущая страница', {:update => 'devlist', 
 					   :url => {:action => 'search',
 					            :page => @device_pages.current.previous, 
-						    :order => @params[:order] ,
-						    :searchtext => @params[:searchtext], 
-						    :searchfield => @params[:searchfield],
-						    :searchdevices => @params[:searchdevices],
-						    :searchdevtype => @params[:searchdevtype],
+						    :order => params[:order] ,
+						    :searchtext => params[:searchtext], 
+						    :searchfield => params[:searchfield],
+						    :searchdevices => params[:searchdevices],
+						    :searchdevtype => params[:searchdevtype],
+						    :searchvendor => params[:searchvendor],
 						    :page=> @device_pages.current.previous
 						    }
 					  } if @device_pages.current.previous %>
 
 <%= pagination_links_each (@device_pages,{}){|l| link_to_remote l.to_s, :update => 'devlist', 
 									   :url=> {:action => 'search',
-									   	   :order => @params[:order],
-									           :searchtext => @params[:searchtext], 
-										   :searchfield => @params[:searchfield],
-										   :searchdevices => @params[:searchdevices], 
-										   :searchdevtype => @params[:searchdevtype],
+									   	   :order => params[:order],
+									           :searchtext => params[:searchtext], 
+										   :searchfield => params[:searchfield],
+										   :searchdevices => params[:searchdevices], 
+										   :searchdevtype => params[:searchdevtype],
+										   :searchvendor => params[:searchvendor],
 										   :page=>l}} %>
 
 <%= link_to_remote 'Следующая страница', {:update => 'devlist', 
 					  :url=> {:action => 'search',
-					  	  :order => @params[:order],
-					  	  :searchtext => @params[:searchtext], 
-						  :searchfield => @params[:searchfield],
-						  :searchdevices => @params[:searchdevices],
-						  :searchdevtype => @params[:searchdevtype], 
+					  	  :order => params[:order],
+					  	  :searchtext => params[:searchtext], 
+						  :searchfield => params[:searchfield],
+						  :searchdevices => params[:searchdevices],
+						  :searchdevtype => params[:searchdevtype], 
+						  :searchvendor => params[:searchvendor], 
 						  :page=> @device_pages.current.next 
 						  }
 					 } if @device_pages.current.next %> 
 
 
-<TABLE border=0 cellspacing="0" cellpadding="3" width="100%">
-     <TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
+<TABLE border=0 cellspacing="3" cellpadding="3" width="100%">
+     <TR bgcolor="#264398" align="left" style="color:#FFFFFF;font-weight:bold">
 <!--      <TD><%= link_to 'Производитель',{ :action => 'list', :order=>'vendor_id'},{:class => "tablehead"} %></TD> -->
-      <TD><%= link_to_remote 'Производитель',{ :update=>:devlist, :url => {:order =>'vendor_id',:searchtext => @params[:searchtext], :searchfield => @params[:searchfield],:searchdevices => @params[:searchdevices],:searchdevtype => @params[:searchdevtype]}},{:class => "tablehead"} %></TD>
+      <TD><%= link_to_remote 'Производитель',{ :update=>:devlist, :url => {:order =>'vendor_id',:searchtext => params[:searchtext], :searchfield => params[:searchfield],:searchdevices => params[:searchdevices],:searchdevtype => params[:searchdevtype]}},{:class => "tablehead"} %></TD>
 <!--      <TD><%= link_to 'Описание',{ :action => 'list', :order=>'name'},{:class => "tablehead"} %></TD>-->
-      <TD><%= link_to_remote 'Описание',{ :update=>:devlist, :url => {:order =>'name',:searchtext => @params[:searchtext], :searchfield => @params[:searchfield],:searchdevices => @params[:searchdevices],:searchdevtype => @params[:searchdevtype]}},{:class => "tablehead"} %></TD>
+      <TD><%= link_to_remote 'Описание',{ :update=>:devlist, :url => {:order =>'name',:searchtext => params[:searchtext], :searchfield => params[:searchfield],:searchdevices => params[:searchdevices],:searchdevtype => params[:searchdevtype]}},{:class => "tablehead"} %></TD>
 <!--      <TD><%= link_to 'Партномер',{ :action => 'list', :order=>'partnumber'},{:class => "tablehead"} %></TD>-->
-      <TD><%= link_to_remote 'Партномер',{ :update=>:devlist, :url => {:order =>'partnumber',:searchtext => @params[:searchtext], :searchfield => @params[:searchfield],:searchdevices => @params[:searchdevices],:searchdevtype => @params[:searchdevtype]}},{:class => "tablehead"} %></TD>
+      <TD><%= link_to_remote 'Партномер',{ :update=>:devlist, :url => {:order =>'partnumber',:searchtext => params[:searchtext], :searchfield => params[:searchfield],:searchdevices => params[:searchdevices],:searchdevtype => params[:searchdevtype]}},{:class => "tablehead"} %></TD>
 <!--      <TD><%= link_to 'Серийный №',{ :action => 'list', :order=>'serialnumber'},{:class => "tablehead"} %></TD>-->
-      <TD><%= link_to_remote 'Серийный №',{ :update=>:devlist, :url => {:order =>'serialnumber',:searchtext => @params[:searchtext], :searchfield => @params[:searchfield],:searchdevices => @params[:searchdevices],:searchdevtype => @params[:searchdevtype]}},{:class => "tablehead"} %></TD>
+      <TD><%= link_to_remote 'Серийный №',{ :update=>:devlist, :url => {:order =>'serialnumber',:searchtext => params[:searchtext], :searchfield => params[:searchfield],:searchdevices => params[:searchdevices],:searchdevtype => params[:searchdevtype]}},{:class => "tablehead"} %></TD>
 <!--      <TD><%= link_to 'Инв. №',{:action => 'list', :order=>'labnumber'},{:class => "tablehead"} %></TD>-->
-      <TD><%= link_to_remote 'Инв. №', {:update=>:devlist, :url => {:order =>'labnumber',:searchtext => @params[:searchtext], :searchfield => @params[:searchfield],:searchdevices => @params[:searchdevices],:searchdevtype => @params[:searchdevtype]}},{:class => "tablehead"} %></TD>
+      <TD><%= link_to_remote 'Инв. №', {:update=>:devlist, :url => {:order =>'labnumber',:searchtext => params[:searchtext], :searchfield => params[:searchfield],:searchdevices => params[:searchdevices],:searchdevtype => params[:searchdevtype]}},{:class => "tablehead"} %></TD>
       <TD>Интерфейсы</TD>
       <TD></TD>
      </TR>
       <% @col = 1 %>
      <% @devices.each do |device| %>
-     <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
+     <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="left">
       <% if (@col >= 2)
         @col=1
       else
@@ -60,7 +63,7 @@
       <TD><%= device.serialnumber %></TD>
       <TD><%= device.labnumber %></TD>
       <TD>
-      <% InterfaceType.find_all.each do |it| %>
+      <% InterfaceType.find(:all).each do |it| %>
         <% interface_type_dev_len = device.interfaces.find(:all,:conditions => ['interface_type_id = ?',it.id]).length %>
         <% if interface_type_dev_len != 0 %>
           <%= it.name + " x " + interface_type_dev_len.to_s %>
@@ -72,11 +75,11 @@
       	<%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>device.id} %>
       <% end %> 
       <% if current_user.has_role? "dev_admin" %>
-      	<%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>device.id}, :confirm=>"Удалять оборудование - плохо!!! Это точно надо?", :post=>true %>
+      	<%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>device.id}, :confirm=>"Удалять оборудование - плохо!!! Это точно надо?", :post => "true" %>
       <% end %>
       
       <!-- <%= link_to "Ред.", {:action=>"edit", :id=>device.id} %>
-      <%= link_to "Уд.", {:action=>"destroy", :id=>device.id}, :confirm=>"Точно?", :post=>true %> -->
+      <%= link_to "Уд.", {:action=>"destroy", :id=>device.id}, :confirm=>"Точно?", :post => "true" %> -->
       </TD>
      </TR>
      <% end %>

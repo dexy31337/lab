@@ -19,7 +19,7 @@ public
   end
 
   # GETs should be safe (see http://www.w3.org/2001/tag/doc/whenToUseGet.html)
-  verify :method => :post, :only => [ :destroy, :create, :update ],
+  verify :method => "post", :only => [ :destroy, :create, :update ],
          :redirect_to => { :action => :list }
 
   def list
@@ -54,8 +54,8 @@ public
     @reservation = Reservation.new(params[:reservation])
     if @reservation.save
       Device.find(:all).each do |dev|
-      if(@params['device_'+dev.id.to_s] != nil )
-        checked = @params['device_'+dev.id.to_s]['checked']
+      if(params['device_'+dev.id.to_s] != nil )
+        checked = params['device_'+dev.id.to_s]['checked']
           if(checked != nil && checked.length > 0)
 #            dev.reservation_id = @reservation.id
 #            dev.save

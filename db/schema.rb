@@ -2,7 +2,15 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 9) do
+ActiveRecord::Schema.define(:version => 11) do
+
+  create_table "compatibility", :id => false, :force => true do |t|
+    t.column "source_id",      :integer, :null => false
+    t.column "destination_id", :integer, :null => false
+  end
+
+  add_index "compatibility", ["source_id"], :name => "fk_series_source"
+  add_index "compatibility", ["destination_id"], :name => "fk_series_destination"
 
   create_table "devices", :force => true do |t|
     t.column "name",                :string,  :default => "", :null => false
@@ -17,12 +25,15 @@ ActiveRecord::Schema.define(:version => 9) do
     t.column "comment",             :text
     t.column "serving_property_id", :integer
     t.column "modular",             :boolean
+    t.column "is_chasis",           :boolean
+    t.column "series_id",           :integer
   end
 
   add_index "devices", ["device_id"], :name => "fk_device_device"
   add_index "devices", ["vendor_id"], :name => "fk_device_vendor"
   add_index "devices", ["reservation_id"], :name => "fk_device_reservation"
   add_index "devices", ["serving_property_id"], :name => "fk_device_serving_property"
+  add_index "devices", ["series_id"], :name => "fk_device_series"
 
   create_table "engine_schema_info", :id => false, :force => true do |t|
     t.column "engine_name", :string
@@ -115,6 +126,11 @@ ActiveRecord::Schema.define(:version => 9) do
 
   add_index "roles_users", ["user_id", "role_id"], :name => "roles_users_all_index", :unique => true
   add_index "roles_users", ["role_id"], :name => "role_id"
+
+  create_table "series", :force => true do |t|
+    t.column "vendor_id", :integer,                 :null => false
+    t.column "name",      :string,  :default => "", :null => false
+  end
 
   create_table "serving_properties", :force => true do |t|
     t.column "cpu_count",    :integer

@@ -26,7 +26,7 @@
       <TD><%= engineer.email %></TD>
       <TD>
       <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>engineer.id} %>
-      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>engineer.id}, :confirm=>"Удалять людей - плохо!!! Это точно надо?", :post=>true %>
+      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>engineer.id}, :confirm=>"Удалять людей - плохо!!! Это точно надо?", :post => "true" %>
       </TD>
      </TR>
      <% end %>

@@ -14,7 +14,7 @@
   <% end %>
     <td><%= link_to 'Показать', :action => 'show', :id => vendor %></td>
     <td><%= link_to 'Редактировать', :action => 'edit', :id => vendor %></td>
-    <td><%= link_to 'Удалить', { :action => 'destroy', :id => vendor }, :confirm => 'Точно удалить?', :post => true %></td>
+    <td><%= link_to 'Удалить', { :action => 'destroy', :id => vendor }, :confirm => 'Точно удалить?', :post => "true" %></td>
   </tr>
 <% end %>
 </table>

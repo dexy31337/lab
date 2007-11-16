@@ -4,7 +4,7 @@
   <%= date_select 'reservation', 'start'  %></p>
   
   <p><label for="reservation_engineer_id">Инженер</label></p>
-  <%= select 'reservation', 'engineer_id', Engineer.find_all.collect {|e|  [ e.last + " " + e.first , e.id ] } %></p>
+  <%= select 'reservation', 'engineer_id', Engineer.find(:all).collect {|e|  [ e.last + " " + e.first , e.id ] } %></p>
   
   <%= render :partial => 'form' %>
   

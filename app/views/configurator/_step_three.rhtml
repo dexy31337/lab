@@ -1,0 +1,41 @@
+<% if @params[:device] == nil then %>
+   Надо выбрать шасси!
+<% else %>
+   <% if Device.find(@params[:device]).series == nil then %>
+      Устройство не имеет логической привязки с модулю совместимости, обратитесь к администратору.
+   <% else %>
+      <% if @device.modular %>
+         <h3>В устройстве установлены следующие модули:</h3>
+	 <table border=1>
+	 <tr><td colspan="4">Отметьте требуемые</td></tr>
+         <% @children.each do |child| %>
+	    <tr>
+	    <td><%= check_box_tag("device["+child.id.to_s+"][used]","1", :checked => true) %>
+	    <%= hidden_field_tag("device["+child.id.to_s+"][used]","0") %></td>
+	    <td><%= child.labnumber %></td><td><%= child.partnumber %></td><td><%= child.name %></td>
+	    </tr>
+         <% end %>
+	 </table>
+      <% end %>
+      <h3>C данным устройством совместимы:</h3>
+      <% Device.find(@params[:device]).series.series.collect.each do |s| %>
+	 <table border=1>
+	 <tr><td colspan="4">Отметьте требуемые</td></tr>
+	 <tr><td colspan="4"><b><%= s.name.to_s %></b></td></tr>
+	 <% s.devices.each do |d| %>
+	    <% if d.reservation == nil %>
+	       <tr>
+	       <td><%= check_box_tag("device["+d.id.to_s+"][used]","1") %>
+	       <%= hidden_field_tag("device["+d.id.to_s+"][used]","0") %></td>
+	       <td><%= d.labnumber %></td><td><%= d.partnumber %></td><td><%= d.name %></td>
+	       </tr>
+	    <% end %>
+	 <% end %>
+	 </table>
+      <% end %>
+   <% end %>
+<% end %>
+
+<div id="step4">
+<%= submit_tag "GO"%>
+</div>

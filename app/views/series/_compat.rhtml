@@ -1,0 +1,13 @@
+<h3>Compatibility for <%= @series.name %></h3><%= link_to_remote "Назад к "+@series.vendor.name, :update => 'series', :url => { :action => 'series',:vendor => @series.vendor.id} %><br>
+<%= select 'series',
+        'series',
+        @incompatible.collect{|v|[v.name,v.id]}.sort ,
+        {:include_blank => true},
+	{:onchange => "if(!this[this.selectedIndex].value ==0){new Ajax.Updater('series', '/series/modcompat?do=add&id="+@series.id.to_s+"&series=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})}"} %>
+
+<p>Compatible with:</p>
+<% @compatible.each do |c|%>
+<%= c.name %><font onclick ="new Ajax.Updater('series', '/series/modcompat?do=del&id=<%=@series.id.to_s%>&series=<%= c.id %>', {asynchronous:true, evalScripts:true})">Удалить</font><br>
+<% end %>
+
+</p>

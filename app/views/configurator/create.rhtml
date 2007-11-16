@@ -1,0 +1,20 @@
+<hr/>
+Прошу зарезервировать следующее оборудование до &lt;ДД.ММ.ГГ&gt;:
+<table border=1>
+<tr>
+<td>Инв№</td>
+<td>P/N</td>
+<td>Описание</td>
+<td>S/N</td>
+</tr>
+
+<% @res.each do |r| %>
+<tr>
+<td><%= r.labnumber %></td>
+<td><%= r.partnumber %></td>
+<td><%= r.vendor.name%> <%= r.name %></td>
+<td><%= r.serialnumber %></td>
+</tr>
+<% end %>
+</table>
+<hr/>

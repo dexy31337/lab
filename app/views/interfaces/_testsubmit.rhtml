@@ -1,4 +1,4 @@
-<% intto = @params[:int_to] %>
+<% intto = params[:int_to] %>
 
 <% if !(/^(1[0-5]|0?[2-9])[-](0?[1-9]|1[0-9]|2[0-4])$/.match(intto)) %>
 	<font color="red">Неверный формат</font>
@@ -8,6 +8,6 @@
 	<% if int.interface %>
 		Занято (<%= int.interface.name %>)!
 	<%  else %>
-		<%= link_to 'Скроссировать'+image_tag('ok',:size=>'16x16',:border=>'0'), :action => 'cross', :interface_id => int.id, :id => @params[:id] %>
+		<%= link_to 'Скроссировать'+image_tag('ok',:size=>'16x16',:border=>'0'), :action => 'cross', :interface_id => int.id, :id => params[:id] %>
 	<% end %>
 <% end %>

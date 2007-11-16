@@ -24,7 +24,7 @@
       <TD><%= reservation.comment %></TD>
       <TD>
       <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>reservation.id} %>
-      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>reservation.id}, :confirm=>"Удалить резервацию и освободить оборудование?", :post=>true %>
+      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>reservation.id}, :confirm=>"Удалить резервацию и освободить оборудование?", :post => "true" %>
       </TD>
      </TR>
      <% end %>

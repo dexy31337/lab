@@ -7,4 +7,5 @@ class Device < ActiveRecord::Base
   validates_uniqueness_of :scope =>'interface_id'
   belongs_to  :device
   has_many    :devices
+  belongs_to  :series
 end

@@ -1,0 +1,15 @@
+Step Two<br>
+Select chasis
+
+<% if @params[:vendor] == nil then %>
+Надо выбрать производителя!
+<% else %>
+<%= start_form_tag :action => 'create' %>
+
+<%= select 'device', 'id', Device.find(:all, :conditions => {:vendor_id => @params[:vendor], :reservation_id => nil },:order => 'name ASC').collect{|d| [d.labnumber.to_s + ":" + d.name.to_s,d.id]},
+{:include_blank => 'true'},
+{:onchange => "new Ajax.Updater('step3', '/configurator/step_three?device=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})"} %>
+<div id="step3">
+</div>
+<% end %>
+<%= end_form_tag %> 

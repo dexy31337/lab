@@ -1,0 +1,32 @@
+DEPRECATION WARNING: start_form_tag is deprecated and will be removed from Rails 2.0
+DEPRECATION WARNING: end_form_tag is deprecated and will be removed from Rails 2.0
+./app/views/interfaces/new.rhtml
+./app/views/interfaces/new.rhtml
+./app/views/interfaces/edit.rhtml
+./app/views/interfaces/edit.rhtml
+./app/views/devices/new.rhtml
+./app/views/devices/new.rhtml
+./app/views/devices/list.rhtml
+./app/views/devices/edit.rhtml
+./app/views/devices/edit.rhtml
+./app/views/reservations/new.rhtml
+./app/views/reservations/new.rhtml
+./app/views/reservations/edit.rhtml
+./app/views/reservations/edit.rhtml
+./app/views/interface_types/new.rhtml
+./app/views/interface_types/new.rhtml
+./app/views/interface_types/edit.rhtml
+./app/views/interface_types/edit.rhtml
+./app/views/account/login.rhtml
+./app/views/account/login.rhtml
+./app/views/account/signup.rhtml
+./app/views/account/signup.rhtml
+./app/views/vendors/new.rhtml
+./app/views/vendors/new.rhtml
+./app/views/vendors/edit.rhtml
+./app/views/vendors/edit.rhtml
+./app/views/engineers/new.rhtml
+./app/views/engineers/new.rhtml
+./app/views/engineers/edit.rhtml
+./app/views/engineers/edit.rhtml
+
