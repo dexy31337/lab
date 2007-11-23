@@ -9,6 +9,9 @@ class SeriesController < ApplicationController
 
 	def v_series
 	   @series = Series.find(:all,:conditions => {:vendor_id => params[:vendor]},:order => 'name ASC')
+	   @series_chasis = Series.find(:all,:conditions => {:vendor_id => params[:vendor],:chasis => :true}, :order => 'name ASC'}
+	   
+	   @series_module = Series.find(:all,:conditions => {:vendor_id => params[:vendor],:chasis => :false}, :order => 'name ASC'}
 	   render :partial => "v_series"
  	end
 	
@@ -24,6 +27,7 @@ class SeriesController < ApplicationController
 	
 	def compatibility
 	  @series = Series.find(params[:id])
+	  #@series_chasis = Series.find(
 	  @compatible = @series.series.collect
 	  @incompatible = Series.find(:all,:conditions => {:vendor_id => @series.vendor.id}).collect - @compatible - [@series]
 	  render :partial => 'compat'

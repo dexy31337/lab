@@ -17,15 +17,15 @@ td.series {width:35px;height:22px;text-align:center;}
 <table border="1" cellpadding="2" cellspacing="2">
 <tr>
 <td class="series"></td>
-<% @series.each do |s| %>
+<% @series_module.each do |s| %>
 <td class="series"><%=link_to s.name,{:action => "edit",:id => s.id} %></td>
 <% end %>
-<% @series.each do |s| %>
+<% @series_chasis.each do |s| %>
 <tr>
 
 <td class="series"><%= link_to s.name,{:action => "delete",:id => s.id},:confirm => 'Вы уверены, что хотите удалить ' + s.vendor.name + ' ' + s.name + '? (Повлечет за собой удаление ' + s.series.length.to_s + ' связей).', :method => "delete" %></td>
 
-<% @series.each do |c|%>
+<% @series_module.each do |c|%>
 <% if c == s %>
 <td bgcolor="#808080" class="series"> 
 
