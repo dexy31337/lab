@@ -1,8 +1,8 @@
-class DeviceComments < ActiveRecord::Migration
+class SeriesChasis < ActiveRecord::Migration
   def self.up
     #Coulumns
     #devices.comment
-    add_column  :series, :chasis,  :bool
+    add_column  :series, :chasis,  :boolean, :null => false
 
   end
 
