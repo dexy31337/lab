@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "compatibility", :id => false, :force => true do |t|
     t.column "source_id",      :integer, :null => false
@@ -130,6 +130,7 @@ ActiveRecord::Schema.define(:version => 11) do
   create_table "series", :force => true do |t|
     t.column "vendor_id", :integer,                 :null => false
     t.column "name",      :string,  :default => "", :null => false
+    t.column "chasis",    :boolean,                 :null => false
   end
 
   create_table "serving_properties", :force => true do |t|
