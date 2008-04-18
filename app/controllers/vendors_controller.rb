@@ -23,7 +23,8 @@ public
          :redirect_to => { :action => :list }
 
   def list
-    @vendor_pages, @vendors = paginate :vendors, :per_page => 10
+    #@vendor_pages, @vendors = paginate :vendors, :per_page => 10
+    @vendors = Vendor.find(:all,:order => 'name ASC').collect
   end
 
   def show
