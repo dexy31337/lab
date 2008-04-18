@@ -1,6 +1,32 @@
 <h1>Производители</h1>
 
-<table>
+<TABLE border=0 cellspacing="0" cellpadding="3" width="100%">
+     <TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
+	<TD>Название</TD>
+     </TR>
+     <% @col = 1 %>
+     <% @vendors.each do |vendor| %>
+     <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="left">
+      <% if (@col >= 2)
+        @col=1
+      else
+        @col=@col+1
+      end %>
+      <TD><%= link_to vendor.name, {:action=>"show", :id=>vendor.id} %></TD>
+      <TD>
+      <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>vendor.id} %>
+      <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>vendor.id}, :confirm=>"Удалять производителей - плохо!!! Это точно надо?", :post => "true" %>
+      </TD>
+     </TR>
+     <% end %>
+</TABLE>
+
+
+
+
+
+
+<!--<table>
   <tr>
   <% for column in Vendor.content_columns %>
     <th><%= column.human_name %></th>
@@ -23,5 +49,5 @@
 <%= link_to 'Следующая страница', { :page => @vendor_pages.current.next } if @vendor_pages.current.next %> 
 
 <br />
-
+-->
 <%= link_to 'Завести нового произодителя', :action => 'new' %>
