@@ -11,7 +11,7 @@
 		<td><label for="device_labnumber">Инвентарный номер</label></td>
 	</tr>
 	<tr>
-		<td><%= select 'device', 'vendor_id', Vendor.find(:all).collect {|d| [ d.name, d.id ] },{},
+		<td><%= select 'device', 'vendor_id', Vendor.find(:all,:order => "name ASC").collect {|d| [ d.name, d.id ] },{},
 		{:onclick => "new Ajax.Updater('vseries', '/devices/seriesadd?vendor=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})"}%></td>
 		<td><div id="vseries">
 		<% if @device.vendor != nil then %>
