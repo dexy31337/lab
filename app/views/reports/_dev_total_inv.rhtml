@@ -1,6 +1,7 @@
 <TR bgcolor="<%= '#d6d8e1' if col==1 %><%= '#eef0f7' if col==2 %>">
 <% if dev %>
 			<TD><%= dev.location %></TD>
+			<TD><%= dev.box_location %></TD>
 			<TD><%= dev.vendor.name %></TD>
 			<TD><%= dev.labnumber %><%= "(в "+dev.device.labnumber.to_s+")" if dev.device %></TD>
 			<TD><%= dev.partnumber %></TD>
