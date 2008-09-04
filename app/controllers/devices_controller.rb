@@ -30,7 +30,7 @@ public
   end
   
   def search
-    if params[:searchfield].to_s = "any"
+    if params[:searchfield].to_s == "any"
     	searchquery = '( labnumber LIKE %'+params[:searchtext].to_s+'% OR partnumber LIKE %'+params[:searchtext].to_s+'% OR serialnmber LIKE %'+params[:searchtext].to_s+'% OR name LIKE %'+params[:searchtext].to_s+'%)'
     else
     	searchquery = '('+params[:searchfield].to_s + " LIKE '%" + params[:searchtext].to_s + "%')"
