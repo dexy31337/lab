@@ -8,7 +8,7 @@
       <%= select_tag :searchdevtype, '<option value="all">устройства и модули</option><option value="chasis" selected>устройства</option><option value="modules">модули</option>'%>
       <%= select_tag :searchvendor, '<option value="all">любого производителя</option>'+options_from_collection_for_select(Vendor.find(:all),"id", "name") %>
       , у которых
-      <%= select_tag :searchfield , '<option value="labnumber">инв. номер</option><option value="partnumber">партномер</option><option value="serialnumber">серийный номер</option><option value="name">описание</option>' %>
+      <%= select_tag :searchfield , '<option value="labnumber">инв. номер</option><option value="partnumber">партномер</option><option value="serialnumber">серийный номер</option><option value="name">описание</option><option value="any">любое из полей</option>' %>
       содержит
       <%= text_field_tag :searchtext %>
       <%= image_submit_tag 'viewmag', {:size=>"16x16"} %>
