@@ -32,4 +32,5 @@ public
   def total_inv_res
   	@devs = Device.find(:all,:conditions => 'device_id is null',:order => 'location')
   end
+  
 end
