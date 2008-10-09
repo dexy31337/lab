@@ -14,7 +14,7 @@ development:
   adapter: mysql
   database: lab_development
   username: rails
-  password: railsrailsrails
+  password: railsrails
   host: 127.0.0.1
 #  password: 8d1545165d44602ec772f6a968664686
 #  host: 192.168.157.1
@@ -26,12 +26,12 @@ test:
   adapter: mysql
   database: lab_test
   username: rails
-  password: railsrailsrails
+  password: railsrails
   host: localhost
 
 production:
   adapter: mysql
   database: lab_test
   username: rails
-  password: railsrailsrails
+  password: railsrails
   host: localhost

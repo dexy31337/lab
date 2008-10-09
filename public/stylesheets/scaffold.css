@@ -22,6 +22,17 @@ a.tablehead:link {color:#FFFFFF}
 a.tablehead:visited {color:#FFFFFF}
 a.tablehead:hover {color:#FFFFFF}
 a.tablehead:active {color:#FFFFFF}
+a#tooCool {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	display: block;
+	height: 80px;
+	width: 80px;
+	background: url(http://www.w3junkies.com/toocool/files/too_cool_sash.png) bottom right no-repeat;
+	text-indent: -999em;
+	text-decoration: none;
+}
 
 .crosslabel { font-size: 10px }
 
