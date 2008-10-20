@@ -1,0 +1,34 @@
+<%= error_messages_for 'tool' %>
+
+<table border="0">
+        <tr>
+                <td><label for="tool_partnumber">Партномер</label></td></td>
+		<td><%= text_field  'tool','partnumber'%></td>
+
+	</tr>
+	<tr>
+                <td><label for="tool_serialnumber">Серийный номер</label></td>
+		<td><%= text_field  'tool','serialnumber'%></td>
+	</tr>
+	<tr>
+                <td><label for="tool_labnumber">Инв. Номер</label></td>
+		<td><%= text_field  'tool','labnumber'%></td>
+	</tr>
+	<tr>
+                <td><label for="tool_description">Описание</label></td>
+		<td><%= text_field  'tool','description'%></td>
+	</tr>
+	<tr>
+                <td><label for="tool_location">Местоположение</label></td>
+		<td><%= text_field  'tool','location'%></td>
+	</tr>
+	<tr>
+                <td><label for="tool_engineer_id">Инженер</label></td>
+                <td><%= select 'tool', 'engineer_id', Engineer.find(:all,:order => "last ASC").collect {|d| [ d.last+" "+d.first, d.id ] },{}%></td>
+	</tr>
+	<tr>
+                <td><label for="tool_vendor_id">Производитель</label></td>
+                <td><%= select 'tool', 'vendor_id', Vendor.find(:all,:order => "name ASC").collect {|d| [ d.name, d.id ] },{}%></td>
+	</tr>
+
+</table>

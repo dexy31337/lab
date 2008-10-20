@@ -1,0 +1,8 @@
+<H1>Инструмент</H1>
+
+<%= @tool.vendor.name %> <%= @tool.description %> (PN: <%= @tool.partnumber %>, SN: <%= @tool.serialnumber %>)<br/>
+Инженер: <%= @tool.engineer.last + ' ' + @tool.engineer.first + ' ' + @tool.engineer.middle %><br/>
+Расположение: <%= @tool.location %><br/>
+<br/>
+<%= link_to 'Редактировать', :action => 'edit', :id => @tool %> |
+<%= link_to 'Список', :action => 'list' %>

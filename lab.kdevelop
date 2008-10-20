@@ -15,6 +15,7 @@
       <part>KDevVisualBoyAdvance</part>
       <part>KDevDebugger</part>
     </ignoreparts>
+    <projectname>lab</projectname>
   </general>
   <kdevscriptproject>
     <general>

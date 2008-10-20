@@ -1,0 +1,8 @@
+<H1>Редактирование инcтрумента </H1>
+
+<%= start_form_tag :action => 'update', :id => @tool %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag "Сохранить" %>
+<%= end_form_tag %>
+
+<%= link_to 'Назад', :action => 'list' %>
