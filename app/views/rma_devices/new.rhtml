@@ -1,0 +1,18 @@
+<h1>Новое RMA устройство</h1>
+<%= start_form_tag :action => 'create' %>
+  
+  
+  <p><label for="rma_device_vendor_id">Вендор</label></p>
+  <%= select 'rma_devices', 'vendor_id', vendor.find(:all,:order => 'last ASC').collect {|e|  [ e.last + " " + e.first , e.id ] } %></p>
+  
+
+  
+<% Device.find(:all,:order=>:labnumber).each do |dev| %>
+  <% if dev.rma_devices == nil && dev.device == nil && !(dev.labnumber =~ /P[0-9]*/)%>
+    <%= check_box('device_'+dev.id.to_s, 'checked', {}, 'checked','') %>(<%= dev.labnumber %>) <%= dev.name %><br/>
+  <% end %>
+<% end %>
+  <%= submit_tag "Создать" %>
+<%= end_form_tag %>
+
+<%= link_to 'Назад', :action => 'list' %>
