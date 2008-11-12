@@ -1,0 +1,33 @@
+<H1>Устройства РМА по кейсу <%= @rma_device.case_number %></H1>
+<h>Коментарий по кейсу:<%= rma_device.rma_device_coment %> <h>
+<TD>Лабный номер</TD>
+<TD>Серийный номер</TD>
+<TD>Парт номер</TD>
+<TD>Описание устройства</TD>
+<TD></TD>
+     </TR>
+      <% @col = 1 %>
+     <% @rma_devices.each do |rma_device| %>
+     <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
+      <% if (@col >= 2)
+        @col=1
+      else
+        @col=@col+1
+      end %>
+<TD><%= rma_device.labnumber %></TD>
+<TD><%= rma_device.serialnumber %></TD>
+<TD><%= rma_device.purtnumber %></TD>
+
+
+
+<!--           +++возможно сделать хрень чтобы при клике на номер юзер уходил к конкретному девайсу?....надо подумать позжее...... +++
+      <TD><%= link_to  rma_device.partnumber, {:action=>"show", :id=>device.id} %></TD>
+      <TD><%= link_to rma_device.description, {:action=>"show", :id=>device.id} %></TD>
+      <TD><%= link_to rma_device.serialnumber, {:action=>"show", :id=>device.id} %></TD>
+      <TD><%= link_to rma_device.labnumber, {:action=>"show", :id=>device.id} %></TD>
+-->
+
+
+
+<%= link_to 'Редактировать', :action => 'edit', :id => @rma_device %> |
+<%= link_to 'Список', :action => 'list' %>
