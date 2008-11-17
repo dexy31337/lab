@@ -36,7 +36,7 @@ public
     	searchquery = '('+params[:searchfield].to_s + " LIKE '%" + params[:searchtext].to_s + "%')"
     end
     if !current_user.has_role?('PowerUser')
-    	searchquery += 'AND labnumber LIKE \'L%\''
+    	searchquery += 'AND (labnumber LIKE \'L%\' OR labnumber LIKE \'A%\')'
     end
     searchquery += ' AND (reservation_id IS NOT NULL)'if params[:searchdevices] == 'reserved'
     searchquery += ' AND (reservation_id IS NULL)'if params[:searchdevices] == 'free'
@@ -56,6 +56,7 @@ public
     end
     @device = Device.new
     @device.modular = 1
+    @device.permited_to_carry_away = 1
   end
 
   def create

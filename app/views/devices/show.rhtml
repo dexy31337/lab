@@ -44,6 +44,9 @@
 	</tr>
 </table>
 </p>
+<% if !@device.permited_to_carry_away? %>
+<p><font color="red" size="100px">НЕ ПОДЛЕЖИТ ВЫНОСУ ИЗ ЛАБОРАТОРИИ!</font></p>
+<% end %>
 <p>
 <h2>Комментарии</h2>
 <%= @device[:comment] %>
