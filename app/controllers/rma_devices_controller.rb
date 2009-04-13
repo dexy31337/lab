@@ -1,4 +1,4 @@
-class RMADevicesController < ApplicationController
+class RmaDevicesController < ApplicationController
 
 
   def list
