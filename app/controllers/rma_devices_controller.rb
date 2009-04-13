@@ -26,7 +26,7 @@ class RMADevicesController < ApplicationController
           end
         end
       end
-      flash[:notice] = 'Reservation was successfully created.'
+      flash[:notice] = 'Rma device was successfully created.'
       redirect_to :action => 'list'
     else @rma_devices = RmaDevice
       render :action => 'new'
