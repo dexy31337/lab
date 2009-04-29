@@ -10,7 +10,7 @@
 <%= text_area 'rma_device', 'comment'  %></p>
 
 <% Device.find(:all,:order=>:labnumber,:conditions => 'labnumber LIKE "S%"' ).each do |dev| %>
-  <% if dev.rma_device == nil%>
+  <% if dev.device == nil%>
     <%= check_box('device_'+dev.id.to_s, 'checked', {}, 'checked','') %>(<%= dev.labnumber %>) <%= dev.name %><br/>
   <% end %>
 <% end %>
