@@ -2,7 +2,7 @@ class RmaDevicesController < ApplicationController
 
 
   def list
-     @rma_devices = RmaDevice.list
+     @rma_devices = RmaDevice.find(:all)
   end
 
   def show
