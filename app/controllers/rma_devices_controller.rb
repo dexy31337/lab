@@ -16,20 +16,20 @@ class RmaDevicesController < ApplicationController
 
   def create
     @rma_devices = RmaDevice.new(params[:rma_devices])
-    if @rma_devices.save
-      RmaDevice.find(:all).each do |dev|
-      if(params['rma_device_'+dev.id.to_s] != nil )
-        checked = params['rma_device_'+dev.id.to_s]['checked']
-          if(checked != nil && checked.length > 0)
+    @rma_devices.save
+#      RmaDevice.find(:all).each do |dev|
+#      if(params['rma_device_'+dev.id.to_s] != nil )
+#       checked = params['rma_device_'+dev.id.to_s]['checked']
+ #         if(checked != nil && checked.length > 0)
 
-             reserve(dev,@rma_devices[:id])
-          end
-        end
-      end
-      flash[:notice] = 'Rma device was successfully created.'
+ #            reserve(dev,@rma_devices[:id])
+ #         end
+ #       end
+ #     end
+  #    flash[:notice] = 'Rma device was successfully created.'
       redirect_to :action => 'list'
-    else @rma_devices = RmaDevice
-      render :action => 'new'
+#    else @rma_devices = RmaDevice
+ #     render :action => 'new'
     end
   end
 
