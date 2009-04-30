@@ -19,7 +19,6 @@ class RmaDevicesController < ApplicationController
     device.save
     Device.find(:all,:conditions => ['device_id = ?',device[:id]]).collect.each do |dev|
       rma_log (dev,rma_device_id)
-    end
   end
 
   def create
