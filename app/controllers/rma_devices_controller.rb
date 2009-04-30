@@ -32,6 +32,9 @@ class RmaDevicesController < ApplicationController
 #            dev.reservation_id = @reservation.id
 #            dev.save
              rma_log(dev,@rma_devices[:id])
+
+           end 
+       end
      redirect_to :action => 'list'
 
   end
