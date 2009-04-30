@@ -3,7 +3,9 @@
 <TABLE border=0 cellspacing="0" cellpadding="3" width="100%">
      <TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
       <TD>Номер кейса</TD>
+      <TD>Партномер</TD>
       <TD>Кометарий</TD>
+      <TD> Р\У </TD>
       <TD></TD>
      </TR>
       <% @col = 1 %>
@@ -14,10 +16,12 @@
       else
         @col=@col+1
       end %>
-     <TD><%= link_to  rma_device.case_number, {:action=>"show", :id=>rma_device.id} %></TD>
- <TD><%= rma_device.rma_device_coment %></TD>
 
-      <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>rma_device.id} %>
+     <TD><%= link_to  rma_device.case_number, {:action=>"show", :id=>rma_device.id} %></TD>
+     <TD><TR><%=  rma_device.device %></TR></TD>
+     <TD><%= rma_device.rma_device_coment %></TD>
+
+     <TD> <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>rma_device.id} %>
       <%= link_to image_tag("editdelete", :size => "16x16", :alt => 'Удалить', :border => 0), {:action=>"destroy", :id=>rma_device.id}, :confirm=>"Удалять - плохо!!! Это точно надо?", :post => "true" %>
       </TD>
      </TR>
