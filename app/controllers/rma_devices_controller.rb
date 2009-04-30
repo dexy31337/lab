@@ -19,11 +19,12 @@ class RmaDevicesController < ApplicationController
     device.save
     Device.find(:all,:conditions => ['device_id = ?',device[:id]]).collect.each do |dev|
       rma_log (dev,rma_device_id)
+    end
   end
 
   def create
     @rma_devices = RmaDevice.new(params[:rma_devices])
-    @rma_devices.save
+   if @rma_devices.save
    Device.find(:all).each do |dev|
       if(params['device_'+dev.id.to_s] != nil )
         checked = params['device_'+dev.id.to_s]['checked']
@@ -31,10 +32,11 @@ class RmaDevicesController < ApplicationController
 #            dev.reservation_id = @reservation.id
 #            dev.save
              rma_log(dev,@rma_devices[:id])
-	   end
+            end
+	  end
        end
      redirect_to :action => 'list'
-
+    end
   end
 
   def edit
