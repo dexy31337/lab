@@ -18,7 +18,8 @@
       end %>
 
      <TD><%= link_to  rma_device.case_number, {:action=>"show", :id=>rma_device.id} %></TD>
-     <TD><TR><%=  rma_device.device %></TR></TD>
+     <TD><TR><%=  rma_device.devices.each do |devises| %>
+     <TD><%= devices.purtnamber%></TD></TR></TD>
      <TD><%= rma_device.rma_device_coment %></TD>
 
      <TD> <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>rma_device.id} %>
