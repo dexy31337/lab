@@ -23,7 +23,7 @@ public
          :redirect_to => { :action => :list }
 
   def list
-    @reservation_pages, @reservations = paginate :reservations, :per_page => 30, :order => :end
+    @reservation_pages, @reservations = paginate :reservations, :per_page => 100, :order => :end
   end
 
   def show
