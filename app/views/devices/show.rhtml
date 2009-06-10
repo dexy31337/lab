@@ -1,6 +1,8 @@
 <p>
 <h1>Устройство</h1>
-<h3><%= @device[:name] %></h3>
+<h3>
+<%= @device[:devtype]+" - " if @device[:devtype] != 'Прочее' %>
+<%= @device[:name] %></h3>
 <% if @device[:serving_property_id] != nil %>
 <p>Cервер
 <% @server = ServingProperty.find(@device[:serving_property_id]) %>

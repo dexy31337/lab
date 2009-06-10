@@ -4,7 +4,7 @@
 <table border="0">
 	<tr>
 		<td><label for="device_vendor_id">Производитель</label></td>
-		<td><label for="device_series_id">Серия</label></td>
+		<td><label for="device_series_id">Тип</label></td>
 		<td><label for="device_name">Название</label></td>
 		<td><label for="device_partnumber">Партномер</label></td>
 		<td><label for="device_serialnumber">Серийный номер</label></td>
@@ -13,13 +13,19 @@
 	<tr>
 		<td><%= select 'device', 'vendor_id', Vendor.find(:all,:order => "name ASC").collect {|d| [ d.name, d.id ] },{},
 		{:onclick => "new Ajax.Updater('vseries', '/devices/seriesadd?vendor=' + this[this.selectedIndex].value, {asynchronous:true, evalScripts:true})"}%></td>
-		<td><div id="vseries">
-		<% if @device.vendor != nil then %>
-		<%= select 'device','series_id', Series.find(:all,:conditions => {:vendor_id => @device.vendor.id}).collect{|s| [s.name,s.id]}%>
-		<% else %>
+		<td>
+		<!--
+		<div id="vseries">
+		<%# if @device.vendor != nil then %>
+		<%#= select 'device','series_id', Series.find(:all,:conditions => {:vendor_id => @device.vendor.id}).collect{|s| [s.name,s.id]}%>
+		<%# else %>
 		x
-		<% end %>
-		</div></td>
+		<%# end %>
+
+		</div>-->
+		<%= select 'device','devtype',["Маршрутизатор","Коммутатор","Шлюз","WiFi точка доступа","WiFi бридж","WiFi репитер","Телефон","Камера","Видеотерминал","Межсетевой экран","Медиаконвертер","Специализированный сервер","Сервер x86","Сервер SPARC","Сервер Power","Сервер Itanium","Система хранения","Устройство мониторинга","Телефонная станция","Принтер","Ноутбук","Рабочая станция","Оптический уплотнитель","Прочее"] %>
+
+		</td>
 		<td><%= text_field 'device', 'name'  %></td>
 		<td><%= text_field 'device', 'partnumber'  %></td>
 		<td><%= text_field 'device', 'serialnumber'  %></td>

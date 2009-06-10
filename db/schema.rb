@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 14) do
+ActiveRecord::Schema.define(:version => 17) do
 
   create_table "compatibility", :id => false, :force => true do |t|
     t.column "source_id",      :integer, :null => false
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(:version => 14) do
     t.column "series_id",              :integer
     t.column "certification",          :boolean
     t.column "permited_to_carry_away", :boolean
+    t.column "rma_device_id",          :integer
+    t.column "devtype",                :string
   end
 
   add_index "devices", ["device_id"], :name => "fk_device_device"
@@ -36,6 +38,7 @@ ActiveRecord::Schema.define(:version => 14) do
   add_index "devices", ["reservation_id"], :name => "fk_device_reservation"
   add_index "devices", ["serving_property_id"], :name => "fk_device_serving_property"
   add_index "devices", ["series_id"], :name => "fk_device_series"
+  add_index "devices", ["rma_device_id"], :name => "fk_devices_rma_devices"
 
   create_table "engine_schema_info", :id => false, :force => true do |t|
     t.column "engine_name", :string
@@ -93,6 +96,9 @@ ActiveRecord::Schema.define(:version => 14) do
   add_index "interfaces", ["device_id"], :name => "fk_interface_device"
   add_index "interfaces", ["interface_id"], :name => "fk_interface_interface"
 
+  create_table "loginers", :force => true do |t|
+  end
+
   create_table "reservations", :force => true do |t|
     t.column "start",       :date
     t.column "end",         :date
@@ -101,6 +107,10 @@ ActiveRecord::Schema.define(:version => 14) do
   end
 
   add_index "reservations", ["engineer_id"], :name => "fk_erservation_engineer"
+
+  create_table "rma_devices", :force => true do |t|
+    t.column "case_number", :string, :default => "", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.column "created_at", :datetime,                                :null => false
