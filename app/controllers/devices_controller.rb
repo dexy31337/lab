@@ -40,9 +40,10 @@ public
     end
     searchquery += ' AND (reservation_id IS NOT NULL)'if params[:searchdevices] == 'reserved'
     searchquery += ' AND (reservation_id IS NULL)'if params[:searchdevices] == 'free'
-    searchquery += ' AND (device_id IS NULL)' if params[:searchdevtype] == 'chasis'
-    searchquery += ' AND (device_id IS NOT NULL)' if params[:searchdevtype] == 'modules'
+    searchquery += ' AND (is_chasis = 1)' if params[:searchdevtype] == 'chasis'
+    searchquery += ' AND (is_chasis = 0)' if params[:searchdevtype] == 'modules'
     searchquery += (' AND (vendor_id = ' + params[:searchvendor].to_s + ')') if (params[:searchvendor] != nil and params[:searchvendor].to_s != 'all')
+    searchquery += (' AND (devtype = "' + params[:searchdevclass].to_s + '")') if (params[:searchdevclass] != nil and params[:searchdevclass] != 'all')
     
     @device_pages, @devices = paginate :devices, :per_page => 16, :order_by => params[:order], :conditions=> searchquery
     render :partial=>'search'
