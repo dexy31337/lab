@@ -24,7 +24,7 @@ class RmaDevicesController < ApplicationController
 
   def create
     @rma_devices = RmaDevice.new(params[:rma_devices])
-   if @rma_devices.savez d 
+   if @rma_devices.save 
    Device.find(:all).each do |dev|
       if(params['device_'+dev.id.to_s] != nil )
         checked = params['device_'+dev.id.to_s]['checked']
