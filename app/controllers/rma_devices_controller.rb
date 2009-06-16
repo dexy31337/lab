@@ -29,7 +29,7 @@ class RmaDevicesController < ApplicationController
       if(params['device_'+dev.id.to_s] != nil )
         checked = params['device_'+dev.id.to_s]['checked']
           if(checked != nil && checked.length > 0)
-            dev.rma_device_id = @ma_devices.id
+            dev.rma_device_id = @rma_devices.id
             dev.save
 #             rma_log(dev,@rma_devices[:id])
             end
