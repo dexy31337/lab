@@ -10,7 +10,7 @@ class RmaDevicesController < ApplicationController
   end
 
   def new
-    @rma_devices = RmaDevice.new
+    @rma_device = RmaDevice.new
   end
 
 
