@@ -2,11 +2,11 @@ class RmaDevicesController < ApplicationController
 
 
   def list
-     @rma_devices = RmaDevice.find(:all)
+     @rma_device = RmaDevice.find(:all)
   end
 
   def show
-    @rma_devices = RmaDevice.find(:all)
+    @rma_device = RmaDevice.find(:all)
   end
 
   def new
@@ -40,12 +40,12 @@ class RmaDevicesController < ApplicationController
   end
 
   def edit
-    @rma_devices = RmaDevice.find(params[:id])
+    @rma_device = RmaDevice.find(params[:id])
   end
 
   def destroy
-    @rma_devices = RmaDevice.find(params[:id])
-    @rma_devices = RmaDevice.destroy
+    @rma_device = RmaDevice.find(params[:id])
+    @rma_device = RmaDevice.destroy
     redirect_to :action => 'list'
   end
 end
