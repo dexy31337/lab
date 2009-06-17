@@ -44,8 +44,8 @@ class RmaDevicesController < ApplicationController
   end
 
   def destroy
-    @rma_device = RmaDevice.find(params[:id])
-    @rma_device = RmaDevice.destroy
+ RmaDevice.find(params[:id]).destroy
+  
     redirect_to :action => 'list'
   end
 end
