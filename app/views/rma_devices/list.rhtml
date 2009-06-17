@@ -17,13 +17,13 @@
         @col=@col+1
       end %>
 
-     <TD><%= rma_device.case_number%></TD>
+     <TD><%= link_to  rma_device.case_number, {:action=>"show", :id=>rma_device.id} %></TD>
      <TD>
 	<table>
 		<% rma_device.devices.collect.each do |dev| %>
 		<TR>
 			<td>
-				<%= dev.partnumber %>
+				<%= link_to dev.partnumber ,{:action=>"show", :id=>rma_device.id} %>
 			</td>
 		</TR>
 		<% end %>
