@@ -23,7 +23,7 @@ class RmaDevicesController < ApplicationController
 #  end
 
   def create
-    @rma_devices = RmaDevice.new(params[:rma_devices])
+    @rma_devices = RmaDevice.new(params[:rma_device])
    if @rma_devices.save 
    Device.find(:all).each do |dev|
       if(params['device_'+dev.id.to_s] != nil )
