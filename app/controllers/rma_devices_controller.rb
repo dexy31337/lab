@@ -41,6 +41,7 @@ class RmaDevicesController < ApplicationController
 
   def edit
     @rma_device = RmaDevice.find(params[:id])
+    redirect_to :action => 'list'
   end
 
   def destroy
