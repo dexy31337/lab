@@ -56,6 +56,7 @@ def create
 
   def update 
     @rma_device = RmaDevice.find(params[:id])
+    @rma_device.update_attributes(params[:device])
     if @rma_device.save
     redirect_to :action => 'list'
     end

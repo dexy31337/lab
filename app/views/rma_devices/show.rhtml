@@ -7,7 +7,7 @@
 <TD></TD>
      </TR>
       <% @col = 1 %>
-     <% @rma_devices.each do |rma_device| %>
+     <% @rma_device.each do |rma_device| %>
      <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
       <% if (@col >= 2)
         @col=1
@@ -29,5 +29,5 @@
 
 
 
-<%= link_to 'Редактировать', :action => 'edit', :id => @rma_device %> |
+<%= link_to 'Редактировать', :action => 'edit', :id => @rma_device %> 
 <%= link_to 'Список', :action => 'list' %>
