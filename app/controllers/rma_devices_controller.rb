@@ -37,22 +37,7 @@ def create
 #    end
 #  end
 
-  def create
-    @rma_devices = RmaDevice.new(params[:rma_device])
-   if @rma_devices.save 
-   Device.find(:all).each do |dev|
-      if(params['device_'+dev.id.to_s] != nil )
-        checked = params['device_'+dev.id.to_s]['checked']
-          if(checked != nil && checked.length > 0)
-            dev.rma_device_id = @rma_devices.id
-            dev.save
-#             rma_log(dev,@rma_devices[:id])
-            end
-	  end
-       end
-     redirect_to :action => 'list'
-    end
-  end
+
 
   def update 
     @rma_device = RmaDevice.find(params[:id])
