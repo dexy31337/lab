@@ -2,7 +2,7 @@
 # migrations feature of ActiveRecord to incrementally modify your database, and
 # then regenerate this schema definition.
 
-ActiveRecord::Schema.define(:version => 17) do
+ActiveRecord::Schema.define(:version => 18) do
 
   create_table "compatibility", :id => false, :force => true do |t|
     t.column "source_id",      :integer, :null => false
@@ -109,7 +109,9 @@ ActiveRecord::Schema.define(:version => 17) do
   add_index "reservations", ["engineer_id"], :name => "fk_erservation_engineer"
 
   create_table "rma_devices", :force => true do |t|
-    t.column "case_number", :string, :default => "", :null => false
+    t.column "case_number",         :string, :null => false
+    t.column "rma_device_end_date", :string
+    t.column "rma_device_comment",  :string
   end
 
   create_table "roles", :force => true do |t|
@@ -140,9 +142,9 @@ ActiveRecord::Schema.define(:version => 17) do
   add_index "roles_users", ["role_id"], :name => "role_id"
 
   create_table "series", :force => true do |t|
-    t.column "vendor_id", :integer,                 :null => false
-    t.column "name",      :string,  :default => "", :null => false
-    t.column "chasis",    :boolean,                 :null => false
+    t.column "vendor_id", :integer, :null => false
+    t.column "name",      :string,  :null => false
+    t.column "chasis",    :boolean, :null => false
   end
 
   create_table "serving_properties", :force => true do |t|
@@ -165,11 +167,11 @@ ActiveRecord::Schema.define(:version => 17) do
   add_index "static_permissions", ["title"], :name => "static_permissions_title_index", :unique => true
 
   create_table "tools", :force => true do |t|
-    t.column "partnumber",   :string,  :default => "", :null => false
-    t.column "description",  :string,  :default => "", :null => false
-    t.column "serialnumber", :string,  :default => "", :null => false
-    t.column "labnumber",    :string,  :default => "", :null => false
-    t.column "location",     :string,  :default => "", :null => false
+    t.column "partnumber",   :string,  :null => false
+    t.column "description",  :string,  :null => false
+    t.column "serialnumber", :string,  :null => false
+    t.column "labnumber",    :string,  :null => false
+    t.column "location",     :string,  :null => false
     t.column "engineer_id",  :integer
     t.column "vendor_id",    :integer
   end
@@ -178,10 +180,10 @@ ActiveRecord::Schema.define(:version => 17) do
   add_index "tools", ["vendor_id"], :name => "fk_tool_vendor"
 
   create_table "user_registrations", :force => true do |t|
-    t.column "user_id",    :integer,  :limit => 10, :default => 0,  :null => false
-    t.column "token",      :text,                   :default => "", :null => false
-    t.column "created_at", :datetime,                               :null => false
-    t.column "expires_at", :datetime,                               :null => false
+    t.column "user_id",    :integer,  :limit => 10, :default => 0, :null => false
+    t.column "token",      :text,                                  :null => false
+    t.column "created_at", :datetime,                              :null => false
+    t.column "expires_at", :datetime,                              :null => false
   end
 
   add_index "user_registrations", ["user_id"], :name => "user_registrations_user_id_index", :unique => true

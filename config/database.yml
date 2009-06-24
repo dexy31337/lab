@@ -1,5 +1,4 @@
-# MySQL (default setup).  Versions 4.1 and 5.0 are recommended.
-#
+# MySQL (default setup).  Versions 4.1 and 5.0 are recommendede
 # Install the MySQL driver:
 #   gem install mysql
 # On MacOS X:
@@ -13,8 +12,8 @@
 development:
   adapter: mysql
   database: lab_tesing
-  username: rails
-  password: railsrails
+  username: andrew
+  password: rails
   host: 127.0.0.1
 #  password: 8d1545165d44602ec772f6a968664686
 #  host: 192.168.157.1
@@ -25,13 +24,13 @@ development:
 test:
   adapter: mysql
   database: lab_test
-  username: rails
-  password: railsrails
+  username: andrew
+  password: rails
   host: localhost
 
 production:
   adapter: mysql
   database: lab_test
-  username: rails
-  password: railsrails
+  username: andrew
+  password: rails
   host: localhost
