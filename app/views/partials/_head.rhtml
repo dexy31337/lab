@@ -33,7 +33,7 @@
 
 	menu_array.each do |entry| %>
 	<TD align="center" valign="middle" width="<%= 100/(3*menu_array.length) %>%">
-		<%= link_to image_tag(entry[1]+'.png', :size => "32x32", :border => 0), {:controller => "/"+entry[1], :action => entry[2]} %>
+		<%= link_to image_tag(entry[1]+'.png', :size => "30x30", :border => 0), {:controller => "/"+entry[1], :action => entry[2]} %>
 	</TD>
 	<TD align ="left" width="<%= 200/(3*menu_array.length) %>%">
 		<%= link_to entry[0],{:controller => "/"+entry[1], :action => entry[2]} %>

@@ -13,13 +13,13 @@ class RmaDevicesController < ApplicationController
     @rma_device = RmaDevice.new
   end
 def create
-    @rma_devices = RmaDevice.new(params[:rma_device])
-   if @rma_devices.save 
+    @rma_device = RmaDevice.new(params[:rma_device])
+   if @rma_device.save 
    Device.find(:all).each do |dev|
       if(params['device_'+dev.id.to_s] != nil )
         checked = params['device_'+dev.id.to_s]['checked']
           if(checked != nil && checked.length > 0)
-            dev.rma_device_id = @rma_devices.id
+            dev.rma_device_id = @rma_device.id
             dev.save
 #             rma_log(dev,@rma_devices[:id])
             end
@@ -41,7 +41,7 @@ def create
 
   def update 
     @rma_device = RmaDevice.find(params[:id])
-    @rma_device.update_attributes(params[:device])
+    @rma_device.update_attributes(params[:rma_device])
     if @rma_device.save
     redirect_to :action => 'list'
     end
@@ -53,9 +53,13 @@ def create
   end
 
   def destroy
- RmaDevice.find(params[:id]).destroy
-  
-    redirect_to :action => 'list'
+  @rma_device = RmaDevice.find(params[:id])
+  @rma_device.devices.collect.each do |dev|
+    dev.rma_device_id = nil
+    dev.save
+   end
+  @rma_device.destroy
+  redirect_to :action => 'list'
   end
 end
 

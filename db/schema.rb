@@ -110,8 +110,8 @@ ActiveRecord::Schema.define(:version => 18) do
 
   create_table "rma_devices", :force => true do |t|
     t.column "case_number",         :string, :null => false
-    t.column "rma_device_end_date", :string
-    t.column "rma_device_comment",  :string
+    t.column "rma_device_end_date", :date
+    t.column "rma_device_comment",  :text
   end
 
   create_table "roles", :force => true do |t|

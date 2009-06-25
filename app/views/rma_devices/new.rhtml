@@ -1,20 +1,46 @@
-<h1>Новые RMA устройство</h1>
+<h1 align="center"> Новый RMA кейс </h1>
 <%= start_form_tag :action => 'create' %>
 
 <td><label> Номер РМА кейса</label></td></td>
 <td>INC<%= text_field 'rma_device', 'case_number'%></td>
 
-<p><p>
-
 <p><label for="rma_device_comment">Комментарии по РМА кейсу</label><br/>
-<%= text_area 'rma_device', 'comment'  %></p>
+<%= text_area 'rma_device', 'rma_device_comment'  %>
+</p>
 
-<% Device.find(:all,:order=>:labnumber,:conditions => 'labnumber LIKE "S%"' ).each do |dev| %>
-  <% if dev.device == nil%>
-    <%= check_box('device_'+dev.id.to_s, 'checked', {}, 'checked','') %>(<%= dev.labnumber %>) <%= dev.name %><br/>
+<p><label for="rma_device_end_date">Дата закрытия RMA</label><br/>
+  <%= date_select 'rma_device', 'rma_device_end_date'  %>
+</p>
+
+
+<h2 align="center"> Доступные устройства на складе </h2>
+
+<TABLE border=1 cellspacing="0" cellpadding="3" width="100%">
+<TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
+      <TD>    </TD>
+      <TD>  Партномер </TD>
+      <TD>  Серийный номер </TD>
+      <TD>  Описание </TD>
+   </TR>
+ <% @col = 1 %>
+ <% Device.find(:all,:order=>:labnumber,:conditions => 'labnumber LIKE "S%" and rma_device_id is NULL' ).each do |dev| %>
+ <% if dev.device == nil  %>
+ <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
+      <% if (@col >= 2)
+        @col=1
+      else
+        @col=@col+1
+      end %>
+   <TD> <%= check_box('device_'+dev.id.to_s, 'checked', {}, 'checked','') %></TD>
+   <TD> <%= dev.partnumber %> </TD> 
+   <TD> <%= dev.serialnumber %> </TD>
+   <TD> <%= dev.name %> </TD>
+</TR>
   <% end %>
 <% end %>
-  <%= submit_tag "Создать" %>
+</TABLE>
+  <P><%= submit_tag "Создать новый RMA кейс" %>
+</P>
 <%= end_form_tag %>
 
 <%= link_to 'Назад', :action => 'list' %>
