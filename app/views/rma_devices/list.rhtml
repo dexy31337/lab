@@ -2,11 +2,12 @@
 
 <TABLE border=0 cellspacing="0" cellpadding="3" width="100%">
      <TR bgcolor="#264398" align="center" style="color:#FFFFFF;font-weight:bold">
-      <TD>Номер кейса</TD>
-      <TD>Партномер</TD>
-      <TD>Комметарий</TD>
+      <TD> Номер кейса </TD>
+      <TD> Партномер </TD>
+      <TD> Серийный номер </TD>
+      <TD> Дата окончания <TD>
+      <TD> Комметарий </TD>
       <TD> Р\У </TD>
-      <TD></TD>
      </TR>
       <% @col = 1 %>
      <% @rma_device.each do |rma_device| %>
@@ -17,7 +18,7 @@
         @col=@col+1
       end %>
 
-     <TD> INC<%= link_to  rma_device.case_number, {:action=>"edit", :id=>rma_device.id} %></TD>
+     <TD> INC<%= rma_device.case_number%></TD>
      <TD>
 	<table>
 		<% rma_device.devices.collect.each do |dev| %>
@@ -25,10 +26,20 @@
 			<td>
 				<%= dev.partnumber %>
 			</td>
-		</TR>
 		<% end %>
 	</table>
-	</TD>
+     </TD>
+     <TD>
+	<table>
+		<% rma_device.devices.collect.each do |dev| %>
+		<TR>
+			<td>
+				<%= dev.serialnumber %>
+			</td>
+		<% end %>
+	</table>
+     </TD>
+     <TD> <%= rma_device.rma_device_end_date %> <TD>
      <TD><#%= rma_device.rma_device_comment %></TD>
 
      <TD> <%= link_to image_tag("edit", :size => "16x16", :alt => 'Редактировать', :border => 0) , {:action=>"edit", :id=>rma_device.id} %>
