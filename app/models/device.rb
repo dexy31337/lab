@@ -8,5 +8,5 @@ class Device < ActiveRecord::Base
   belongs_to  :device
   has_many    :devices
   belongs_to  :series
-  has_one :rma_device
+  belongs_to  :rma_device
 end
