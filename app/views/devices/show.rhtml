@@ -15,7 +15,7 @@
 <%= link_to "Перейти в резервацию", :action => 'show', :controller => 'reservations', :id => @device.reservation.id %>
 <% end %>
 <% elsif @device.rma_device_id != nil%>
-<font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%>
+<font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%></font>
 <% else %>
 <i>В данный момент свободно</i>
 <% end %>
