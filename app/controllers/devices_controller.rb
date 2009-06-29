@@ -56,7 +56,7 @@ public
       return false
     end
     @device = Device.new
-    @device.modular = 1
+    @device.modular = 0
     @device.permited_to_carry_away = 1
   end
 
