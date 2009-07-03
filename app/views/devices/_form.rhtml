@@ -5,10 +5,6 @@
 	<tr>
 		<td><label for="device_vendor_id">Производитель</label></td>
 		<td><label for="device_series_id">Тип</label></td>
-		<td><label for="device_name">Название</label></td>
-		<td><label for="device_partnumber">Партномер</label></td>
-		<td><label for="device_serialnumber">Серийный номер</label></td>
-		<td><label for="device_labnumber">Инвентарный номер</label></td>
 	</tr>
 	<tr>
 		<td><%= select 'device', 'vendor_id', Vendor.find(:all,:order => "name ASC").collect {|d| [ d.name, d.id ] },{},
@@ -26,31 +22,51 @@
 		<%= select 'device','devtype',["Маршрутизатор","Коммутатор","Шлюз","WiFi точка доступа","WiFi бридж","WiFi репитер","Телефон","Камера","Видеотерминал","Межсетевой экран","Медиаконвертер","Специализированный сервер","Сервер x86","Сервер SPARC","Сервер Power","Сервер Itanium","Система хранения","Устройство мониторинга","Телефонная станция","Принтер","Ноутбук","Рабочая станция","Оптический уплотнитель","Прочее"] %>
 
 		</td>
+
+	</tr>
+	<tr>
+		<td><label for="device_name">Название</label></td>
+		<td><label for="device_partnumber">Партномер</label></td>
+		<td><label for="device_serialnumber">Серийный номер</label></td>
+		<td><label for="device_labnumber">Инвентарный номер</label></td>
+	</tr>
+	<tr>
 		<td><%= text_field 'device', 'name'  %></td>
 		<td><%= text_field 'device', 'partnumber'  %></td>
 		<td><%= text_field 'device', 'serialnumber'  %></td>
 		<td><%= text_field 'device', 'labnumber'  %></td>
 	</tr>
+
 </table>
+<br/>
 
-<p><label for="device_device_id">Родительское устройство</label>
-<%= select 'device', 'device_id', Device.find( :all,:order => :labnumber, :conditions => 'modular = 1').collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true } %></p>
+		<% if @device.is_bundle == 1 %>
+			<%= @device.device.name.to_s if @device.device != nil %>
+		<% else %>
+			<label for="device_device_id">Родительское устройство</label>
+			<%= select 'device', 'device_id', Device.find( :all,:order => :labnumber, :conditions => 'modular = 1').collect {|d| [ d.labnumber.to_s + " - " + d.name.to_s , d.id ] }, { :include_blank => true }, {:style => "width: 500px"} %>
+		<% end %>
 
-<table border="0">
+
+<br><table border="0">
 	<tr valign="bottom">
-		<td></td>
-		<td><label for="device_location">Местоположение</label></td>
-		<td><label for="device_box_location">Местоположение коробки</label></td>
-	</tr>
-	<tr valign="top">
-		<td><%= check_box 'device','modular',{},'1','0'%><label for="device_modular">Mожет быть родительским</label><br/>
-		    <%= check_box 'device','is_chasis',{},'1','0'%><label for="device_is_chasis">Шасси</label><br/>
-		    <%= check_box 'device','certification',{},'1','0'%><label for="device_certification">Сертификационное</label><br/>
-		    <%= check_box 'device','permited_to_carry_away',{},'1','0'%><label for="device_permited_to_carry_away">Можно выносить из лабы</label></td>
+		<td><label for="device_location">Местоположение:</label></td>
 		<td><%= select 'device', 'location',["В коробке","R0","R1","R2","R3","R4","R5","R6","R7","R8","R9","R10","R11","R12","R13","R14","R15","R16","R17","R18","R19","R20","R21","R22","R23","R24","R25","R26","R27","R28","R29","R30","R31","R32"] %></td>
+		<td><label for="device_box_location">Местоположение коробки</label></td>
 		<td><%= select 'device', 'box_location',["Нет","СС","S0-1","S0-2","S0-3","S1-1","S1-2","S1-3","S2-1","S2-2","S2-3","S3-1","S3-2","S3-3","S4-1","S4-2","S4-3","S4-4","S5-1","S5-2","S5-3","S5-4","S6-1","S6-2","S6-3","S7-1","S7-2","S7-3","S8-1","S8-2","S8-3","S8-4","S9-1","S9-2","S9-3","S9-4","B1-1","B1-2","B1-3","B1-4","B1-5","B1-6","M1-1","M1-2","M1-3","M1-4","LAB-1-1","LAB-1-2","LAB-1-3","LAB-1-4","LAB-2-1","LAB-2-2","LAB-2-3","LAB-2-4","LAB-3-1","LAB-3-2","LAB-3-3","LAB-3-4","LAB-4-1","LAB-4-2","LAB-4-3","LAB-5","L1-1","L1-2","L1-3","L2-1","L2-2","aLAB-1","aLAB-2","aLAB-3","aLAB-4","aLAB-5","aB-1"] %></td>
 	</tr>
 </table>
+<br/>
+		<td><%= check_box 'device','modular',{},'1','0'%>
+		<label for="device_modular">Mожет быть родительским</label><br/>
+		    <%= check_box 'device','is_chasis',{},'1','0'%>
+		<label for="device_is_chasis">Шасси</label><br/>
+		    <%= check_box 'device','certification',{},'1','0'%>
+		<label for="device_certification">Сертификационное</label><br/>
+		    <%= check_box 'device','permited_to_carry_away',{},'1','0'%>
+		<label for="device_permited_to_carry_away">Можно выносить из лабы</label><br/>
+		    <%= check_box 'device','is_bundle',{},'1','0'%>
+		<label for="bundle">Является частью бандла</label>
 <p><label for="device_comment">Комментарии</label><br/>
 <%= text_area 'device', 'comment', {:rows => '5', :cols =>'80'} %></p>
 <p>

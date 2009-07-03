@@ -1,9 +1,23 @@
-<table border="0" cellspacing="0" cellpadding="0" align="center"  <%= ' bgcolor="#99aeef"' if device == @device%>>
+
+
+<% if device.is_bundle == 1 %>
+   <% col1 = "#dc143c"%>
+   <% col2 = "#FFdab9"%>
+   <%else%>
+   <% col1 = "#5f9ea0"%>
+   <% col2 = "#B0C4DE"%>
+<%end%>
+
+
+<table border="0" cellspacing="1" cellpadding="0" align="center"
+<% if device == @device %>
+     bgcolor="<%=col2%>"
+<% end %>>
   <tr>
-    <td width="1px" rowspan="4" bgcolor="#0f2b7e"></td>
-    <td height="1px" bgcolor="#0f2b7e" <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>></td>
-    <td width="1px" rowspan="4" bgcolor="#0f2b7e"></td>
-  </tr>
+    <td width="2" rowspan="4" bgcolor="<%= col1 %>"></td>
+    <td height="2" bgcolor="<%= col1 %>" <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>></td>
+    <td width="2" rowspan="4"  bgcolor="<%= col1 %>"></td></tr>
+
   <tr>
     <td <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>>
       <p style="padding: 5 5 5 5" align="center"><%= link_to device.labnumber + ':' + device.partnumber + '<br/>'+ device.name, :action => 'show', :id => device.id %></p> 
@@ -13,7 +27,6 @@
    <td style="padding: 3 3 3 3">
     <table>
       <tr>
-      
         <% device.devices.each do |dev| %>
         <td>
           <%= render :partial => "dnode", :locals => {:device => dev, :level => level} %><% rowcount = rowcount + 1%>
@@ -24,12 +37,11 @@
           end %>
         </td>
         <% end %>
-      
       </tr>
     </table>
    </td>
   </tr>
   <tr>
-    <td <%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %> bgcolor="#0f2b7e"></td>
+    <td height="2" bgcolor="<%= col1 %>"<%= 'colspan="'+device.devices.length.to_s+'"'if device.devices.length > 0 %>  ></td>
     </tr>
 </table>

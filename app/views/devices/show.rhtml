@@ -2,7 +2,11 @@
 <h1>Устройство</h1>
 <h3>
 <%= @device[:devtype]+" - " if @device[:devtype] != 'Прочее' %>
-<%= @device[:name] %></h3>
+<%= @device[:name] %>
+<% if @device.is_bundle == 1 %>
+	<font color="Red">; данное устройство является частью Bundle </font>
+<% end %>
+</h3>
 <% if @device[:serving_property_id] != nil %>
 <p>Cервер
 <% @server = ServingProperty.find(@device[:serving_property_id]) %>
@@ -12,10 +16,10 @@
 <% if @device.reservation_id != nil %>
 <font color="Red">Зарезервировано с <%= @device.reservation.start.strftime("%d-%b-%y") %> по <%= @device.reservation.end.strftime("%d-%b-%y") %>, инженер <%= @device.reservation.engineer.last %> <%= @device.reservation.engineer.first %>. </font>
 <% if current_user.has_role?("PowerUser") %>
-<%= link_to "Перейти в резервацию", :action => 'show', :controller => 'reservations', :id => @device.reservation.id %>
+	<%= link_to "Перейти в резервацию", :action => 'show', :controller => 'reservations', :id => @device.reservation.id %>
 <% end %>
 <% elsif @device.rma_device_id != nil%>
-<font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%></font>
+	<font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%></font>
 <% else %>
 <i>В данный момент свободно</i>
 <% end %>
@@ -74,6 +78,8 @@ end
 <p><center><h2>Логическая структура</h2></center></p>
 <% #И понеслось говно рекурсивно по трубам 
 %>
+
+
 <p>
 <%= render :partial => "dnode", :locals => {:device => @topdev, :level => 0} %>
 </p>
