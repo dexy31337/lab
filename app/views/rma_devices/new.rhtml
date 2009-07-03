@@ -24,7 +24,6 @@
    </TR>
  <% @col = 1 %>
  <% Device.find(:all,:order=>:labnumber,:conditions => 'labnumber LIKE "S%" and rma_device_id is NULL' ).each do |dev| %>
- <% if dev.device == nil  %>
  <TR bgcolor="<%= '#d6d8e1' if @col==1%><%= '#eef0f7' if @col==2%>" align="center">
       <% if (@col >= 2)
         @col=1
@@ -36,7 +35,6 @@
    <TD> <%= dev.serialnumber %> </TD>
    <TD> <%= dev.name %> </TD>
 </TR>
-  <% end %>
 <% end %>
 </TABLE>
   <P><%= submit_tag "Создать новый RMA кейс" %>

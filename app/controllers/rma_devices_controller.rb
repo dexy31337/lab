@@ -1,5 +1,9 @@
 class RmaDevicesController < ApplicationController
 
+  def index
+    list
+    render :action => 'list'
+  end
 
   def list
      @rma_device = RmaDevice.find(:all)
