@@ -2,9 +2,13 @@
 
 <% if device.is_bundle == 1 %>
    <% col1 = "#dc143c"%>
-   <% col2 = "#FFdab9"%>
    <%else%>
    <% col1 = "#5f9ea0"%>
+<%end%>
+
+<% if @device.rma_device_id != nil%>
+   <% col2 = "#FFdab9"%>
+  <%else%>
    <% col2 = "#B0C4DE"%>
 <%end%>
 

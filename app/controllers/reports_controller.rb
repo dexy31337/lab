@@ -22,12 +22,24 @@ public
      render :action => 'list'
   end
   
+
+  def search_total_report
+	search_total += ('(vendor_id = ' + params[:location_params].to_s + ')') if (params[:location_params] != 	nil and params[:location_params].to_s != 'all')
+	search_total += '(labnumber LIKE \'A%\')' if params[:labnumder_params] == 'type_A'
+	search_total += '(labnumber LIKE \'L%\')' if params[:labnumder_params] == 'type_L'
+	search_total += '(labnumber LIKE \'S%\')' if params[:labnumder_params] == 'type_S'
+	search_total += '(labnumber LIKE \'P%\')' if params[:labnumder_params] == 'type_P'
+	search_total += '(labnumber LIKE \'C%\')' if params[:labnumder_params] == 'type_C'
+  end
+
   def list
   end
   
-  def total_inv
-  	@devs = Device.find(:all,:conditions => 'device_id is null',:order => 'location')
+  def resaults_total_report
+  	@device = Device.find(:all,:conditions => 'searhch_total',:order => 'params')
   end
+
+
   
   def total_inv_res
   	@devs = Device.find(:all,:conditions => 'device_id is null',:order => 'location')

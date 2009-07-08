@@ -4,7 +4,7 @@
 <%= @device[:devtype]+" - " if @device[:devtype] != 'Прочее' %>
 <%= @device[:name] %>
 <% if @device.is_bundle == 1 %>
-	<font color="Red">; данное устройство является частью Bundle </font>
+	<font color="Red">; данное устройство является частью Bundle <%=@device.device.labnumber%> </font>
 <% end %>
 </h3>
 <% if @device[:serving_property_id] != nil %>
