@@ -1,5 +1,5 @@
-<p>
 <h1>Устройство</h1>
+<p>
 <h3>
 <%= @device[:devtype]+" - " if @device[:devtype] != 'Прочее' %>
 <%= @device[:name] %>
@@ -24,8 +24,8 @@
 <i>В данный момент свободно</i>
 <% end %>
 </p>
-<p>
 <h2>Идентификация</h2>
+<p>
 <table width ="600px" border=1>
 	<tr>
 		<td width="45%">Партномер</td>
@@ -39,8 +39,8 @@
 	</tr>
 </table>
 </p>
-<p>
 <h2>Местоположение</h2>
+<p>
 <table width = "400px" border=1>
 	<tr>
 		<td>Устройство</td>
@@ -55,6 +55,23 @@
 <% if !@device.permited_to_carry_away? %>
 <p><font color="red" size="100px">НЕ ПОДЛЕЖИТ ВЫНОСУ ИЗ ЛАБОРАТОРИИ!</font></p>
 <% end %>
+
+<h2>Материальный учёт</h2>
+<p>
+<table width = "800px" border=1>
+	<tr>
+		<td>Номер спецификации</td>
+		<td>Материально ответственное лицо</td>
+		<td>Дата вноса в лабораторию</td>
+	</tr>
+	<tr>
+		<td><%= @device.specification_number.to_s %></td>
+		<td><%= @device.responsible.to_s %></td>
+		<td><%= @device.arrival_date.to_s %></td>
+		
+	</tr>
+</table>
+</p>
 <p>
 <h2>Комментарии</h2>
 <%= @device[:comment] %>
