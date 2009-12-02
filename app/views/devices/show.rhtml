@@ -64,11 +64,13 @@
 		<td>Номер спецификации</td>
 		<td>Материально ответственное лицо</td>
 		<td>Дата вноса в лабораторию</td>
+		<td>Номер акта</td>
 	</tr>
 	<tr>
 		<td><%= @device.specification_number.to_s %></td>
 		<td><%= @device.responsible.to_s %></td>
 		<td><%= @device.arrival_date.to_s %></td>
+		<td><%= @device.act_number.to_s %></td>
 		
 	</tr>
 </table>

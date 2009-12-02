@@ -6,8 +6,8 @@ class AddDeviceFields < ActiveRecord::Migration
   end
 
   def self.down
-  	delete_column :devices,:specification_number
-  	delete_column :devices,:arrival_date
-  	delete_column :devices,:responsible
+  	remove_column :devices,:specification_number
+  	remove_column :devices,:arrival_date
+  	remove_column :devices,:responsible
   end
 end

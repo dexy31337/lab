@@ -85,6 +85,12 @@
 		<td><%= date_select 'device','arrival_date' %></td>
 	</tr>
 </table>
+<table>
+	<tr>
+		<td><label for="device_act_number">Номер акта</label></td>
+		<td><%= text_field 'device','act_number' %></td>
+	</tr>
+</table>
 <br/>
 <p><h4><label for="device_comment">Комментарии</label></h4>
 <%= text_area 'device', 'comment', {:rows => '5', :cols =>'80'} %></p>
