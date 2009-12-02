@@ -14,14 +14,15 @@
 </p>
 <% end %>
 <% if @device.reservation_id != nil %>
-<font color="Red">Зарезервировано с <%= @device.reservation.start.strftime("%d-%b-%y") %> по <%= @device.reservation.end.strftime("%d-%b-%y") %>, инженер <%= @device.reservation.engineer.last %> <%= @device.reservation.engineer.first %>. </font>
-<% if current_user.has_role?("PowerUser") %>
-	<%= link_to "Перейти в резервацию", :action => 'show', :controller => 'reservations', :id => @device.reservation.id %>
-<% end %>
-<% elsif @device.rma_device_id != nil%>
-	<font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%></font>
+	<font color="Red">Зарезервировано с <%= @device.reservation.start.strftime("%d-%b-%y") %> по <%= @device.reservation.end.strftime("%d-%b-%y") %>, инженер <%= @device.reservation.engineer.last %> <%= @device.reservation.engineer.first %>. </font>
+	<% if current_user.has_role?("PowerUser") %>
+		<%= link_to "Перейти в резервацию", :action => 'show', :controller => 'reservations', :id => @device.reservation.id %>
+	<% end %>
 <% else %>
 <i>В данный момент свободно</i>
+<% end %>
+<% if @device.rma_device_id != nil%>
+	<br/><font color="Red">В данный момент заререзвирован под RMA <%=@device.rma_device.case_number%> по <%= @device.rma_device.rma_device_end_date.strftime("%d-%b-%y")%></font>
 <% end %>
 </p>
 <h2>Идентификация</h2>
