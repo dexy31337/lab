@@ -32,5 +32,13 @@ public
   def total_inv_res
   	@devs = Device.find(:all,:conditions => 'device_id is null',:order => 'location')
   end
+
+  def cert_inv
+  	@devs = Device.find(:all,:conditions => 'vendor_id = 2',:order => 'certification DESC,partnumber ASC')
+  end
+  
+  def chasis_inv
+  	@devs = Device.find(:all,:conditions => 'is_chasis = 1',:order => 'vendor_id ASC,partnumber ASC')
+  end
   
 end
