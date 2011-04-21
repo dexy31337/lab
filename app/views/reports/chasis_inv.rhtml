@@ -1,0 +1,32 @@
+<h1>Инвентаризация Cisco</h1>
+
+<div align="center">
+	<TABLE border="1" bordercolor="black" width="100%" cellspacing="0" cellpadding="1">
+		<TR>
+			<TD width="10%">Производитель</TD>
+			<TD width="15%">P/N</TD>
+			<TD width="15%">S/N</TD>
+			<TD width="20%">Описание</TD>
+			<TD width="7%">Стойка</TD>
+			<TD width="13%">L/N</TD>
+		</TR>
+      		<%
+		col = 1
+		@devs.each do |dev|
+      			if (col >= 2)
+		       		col=1
+			else
+			       	col=col+1
+			end %>
+			<TR bgcolor="<%= '#d6d8e1' if col==1 %><%= '#eef0f7' if col==2 %>">
+				<TD><%= dev.vendor.name %></TD>
+                        	<TD><%= dev.partnumber %></TD>
+                        	<TD><%= dev.serialnumber %></TD>
+                        	<TD><%= dev.name %></TD>
+                        	<TD><%= dev.location %></TD>
+                        	<TD><%= dev.labnumber %></TD>
+			</TR>
+			
+		<% end %>
+	</TABLE>
+</div>
